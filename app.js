@@ -23,6 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/about', about);
+app.use('*/images',express.static('public/images/profile_pics'));
+
 
 
 // catch 404 and forward to error handler
