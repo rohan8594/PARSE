@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>About us</title>
+    <title>Home Page</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -43,18 +43,16 @@
 
 <!-- End container -->
         </div>
+<div>
+<form method="post" class="text-center">
+    <input id="title" type="text" name="name_field" placeholder="Enter keywords to search issues" class="col-md-8">
 
-<form action="/data" method="post">
-    <label for="title">Enter Issue title: </label>
-    <input id="title" type="text" name="name_field">
-
-    <label for="gid">Enter a description: </label>
-    <input id="gid" type="text" name="gid_field">
-
-    <button type="submit">Submit</button>
+    <button type="submit">Search</button>
 </form>
-
-
+<div>
+    <% include templates/results.ejs %>
+</div>
+</div>
     </main>
 
 

@@ -1,0 +1,36 @@
+<div class="page-data">
+    <div class="data-table">
+        <table border="1" cellpadding="7" cellspacing="7" align="center">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Zip Code</th>
+            </tr>
+
+            <% if(data.length){
+
+            for(var i = 0;i < data.length;i++) { %>
+
+            <tr>
+                <td><%=data[i].id%></td>
+                <td><%=data[i].title%></td>
+                <td><%=data[i].category%></td>
+                <td><%=data[i].description%></td>
+                <td><%=data[i].zipcode%></td>
+
+            </tr>
+            <% }
+
+            }else{ %>
+            <tr>
+                <td colspan="3">No issues</td>
+            </tr>
+            <% } %>
+
+
+
+        </table>
+    </div>
+</div>
