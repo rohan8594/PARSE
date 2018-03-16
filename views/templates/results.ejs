@@ -15,7 +15,9 @@
 
             <tr>
                 <td><%=data[i].id%></td>
-                <td><%=data[i].title%></td>
+                <td>
+                    <a href="../issue/view/<%=data[i].id%>"><%=data[i].title%></a>
+                </td>
                 <td><%=data[i].category%></td>
                 <td><%=data[i].description%></td>
                 <td><%=data[i].zipcode%></td>

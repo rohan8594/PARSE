@@ -11,13 +11,32 @@ var router = express.Router();
              if(err)
                  console.log("Error Selecting : %s ",err );
 
-             res.render('index',{title:"Customers",data:rows});
+             res.render('index',{title:"Issues",data:rows});
 
          });
 
          //console.log(query.sql);
      });
  });
+router.get('/issue/view/:id', function (req, res, next) {
 
+    var id = req.params.id;
+
+    req.getConnection(function(err,connection){
+
+        var query = connection.query('SELECT * FROM issue WHERE id = ?',[id],function(err,rows)
+        {
+
+            if(err)
+                console.log("Error Selecting : %s ",err );
+
+            res.render('search_result',{page_title:"View Result",data:rows});
+
+
+        });
+
+        //console.log(query.sql);
+    });
+});
 
 module.exports = router;
