@@ -44,11 +44,11 @@
 <!-- End container -->
         </div>
 <div>
-<form method="post" class="text-center">
-    <input id="title" type="text" name="name_field" placeholder="Enter keywords to search issues" class="col-md-8">
-
+<form action="/search_results" method="get" class="text-center">
+    <input id="title" type="text" name="zip_code" placeholder="Enter zipcode" class="col-md-8">
     <button type="submit">Search</button>
 </form>
+    &nbsp;
 <div>
     <% include templates/results.ejs %>
 </div>
