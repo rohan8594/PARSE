@@ -11,7 +11,7 @@ var router = express.Router();
              if(err)
                  console.log("Error Selecting : %s ",err );
 
-             res.render('index',{title:"Issues",data:rows});
+             res.render('index',{title:"Team 04",data:rows});
 
          });
 
@@ -30,7 +30,7 @@ router.get('/issue/view/:id', function (req, res, next) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('search_result',{page_title:"View Result",data:rows});
+            res.render('display_result',{page_title:"View Result",data:rows});
 
 
         });
