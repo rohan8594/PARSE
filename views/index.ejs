@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>About us</title>
+    <title><%= title %></title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -43,7 +43,16 @@
 
 <!-- End container -->
         </div>
-
+<div>
+<form action="/search_results" method="get" class="text-center">
+    <input id="title" type="text" name="zip_code" placeholder="Enter Zipcode:" class="col-md-8">
+    <button type="submit">Search</button>
+</form>
+    &nbsp;
+<div>
+    <% include templates/results.ejs %>
+</div>
+</div>
     </main>
 
 
