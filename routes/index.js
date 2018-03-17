@@ -30,7 +30,7 @@ router.get('/issue/view/:id', function (req, res, next) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('display_result',{page_title:"View Result",data:rows});
+            res.render('display_issue',{page_title:"View Result",data:rows});
 
 
         });
