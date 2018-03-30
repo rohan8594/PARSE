@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -10,71 +10,94 @@
     <title><%= title %></title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
 
-  <body>
+<body>
 
-    <header>
-<!--  BEGIN NAVIGATION BAR -->
+<header>
+    <!--  BEGIN NAVIGATION BAR -->
     <% include templates/navigation.ejs %>
-<!-- END OF NAVIGATION BAR -->
-    </header>
+    <!-- END OF NAVIGATION BAR -->
+</header>
 
-    <main role="main">
+<main role="main">
 
-      <section class="jumbotron text-center">
+    <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
-          <p class="lead text-muted">
-          Environmental Reporting Tool<br>
-          This website is the term project for CSC648/848's Team 04.
+            <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
+            <p class="lead text-muted">
+                Environmental Reporting Tool<br>
+                This website is the term project for CSC648/848's Team 04.
+            </p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- begin container -->
+
+
+        <!-- End container -->
+    </div>
+    <div>
+
+        <form action="/search_results" method="get" class="text-center">
+            <input id="title" type="text" name="zip_code" placeholder="Enter Zipcode:" class="col-md-8">
+            <button type="submit">Search</button>
+
+            <select>
+                <% if(category.length){
+                for(var i = 0;i < category.length;i++) { %>
+                <option><%= category[i].name %></option>
+                <% }
+
+                }else{ %>
+                <option>
+                    No categories
+                </option>
+                <% } %>
+            </select>
+
+        </form>
+        &nbsp;
+        <div>
+            <% include templates/results.ejs %>
+        </div>
+    </div>
+</main>
+
+
+<footer class="text-muted">
+    <div class="container">
+        <!-- Default Bootstrap Footer
+      <p class="float-right">
+        <a href="#">Back to top</a>
       </p>
-        </div>
-      </section>
+      <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+      <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+  -->
+    </div>
+</footer>
 
-      <div class="container">
-      	<!-- begin container -->
-
-
-
-<!-- End container -->
-        </div>
-<div>
-<form action="/search_results" method="get" class="text-center">
-    <input id="title" type="text" name="zip_code" placeholder="Enter Zipcode:" class="col-md-8">
-    <button type="submit">Search</button>
-</form>
-    &nbsp;
-<div>
-    <% include templates/results.ejs %>
-</div>
-</div>
-    </main>
-
-
-    <footer class="text-muted">
-      <div class="container">
-      	<!-- Default Bootstrap Footer
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-    -->
-      </div>
-    </footer>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
 </html>
