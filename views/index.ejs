@@ -47,11 +47,10 @@
 
         <form action="/search_results" method="get" class="text-center">
             <input id="title" type="text" name="zip_code" placeholder="Enter Zipcode:" class="col-md-8">
-            <button type="submit">Search</button>
-
-            <select>
-                <% if(category.length){
-                for(var i = 0;i < category.length;i++) { %>
+            <select name="issue_category">
+                <% if(category.length){ %>
+                <option value="" selected>Select your category</option>
+                <% for(var i = 0;i < category.length;i++) { %>
                 <option><%= category[i].name %></option>
                 <% }
 
@@ -61,6 +60,7 @@
                 </option>
                 <% } %>
             </select>
+            <button type="submit">Search</button>
 
         </form>
         &nbsp;

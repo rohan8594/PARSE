@@ -5,10 +5,14 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
 
     var zip_code = req.query.zip_code;
+    var issue_category = req.query.issue_category;
+    console.log(issue_category);
 
     req.getConnection(function(err, connection) {
 
-        var query = connection.query('SELECT * FROM issue WHERE zipcode LIKE ?', '%' + zip_code + '%', function(err,rows) {
+        var query = connection.query("SELECT issue.id, issue.title, category.name, " +
+            "issue.description, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id " +
+            "WHERE category.name LIKE '%" + issue_category + "%' AND zipcode LIKE '%" + zip_code + "%'", function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
