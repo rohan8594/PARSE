@@ -35,6 +35,14 @@ body {
   padding-bottom: 20px;
 }
 
+/* Results display code */
+.thumbnail-image {
+  height: 80px;
+  width: 80px;
+  border-radius: 10%;
+
+}
+
 .navbar {
   margin-bottom: 20px;
 }
