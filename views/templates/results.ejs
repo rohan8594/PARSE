@@ -3,6 +3,7 @@
         <table border="1" cellpadding="7" cellspacing="7" align="center">
             <tr>
                 <th>ID</th>
+                <th>Preview</th>
                 <th>Title</th>
                 <th>Category</th>
                 <th>Description</th>
@@ -15,6 +16,10 @@
 
             <tr>
                 <td><%=data[i].id%></td>
+                <td>
+                    <a href="../issue/view/<%=data[i].id%>">
+                        <img src=<%=data[i].image%> class="thumbnail-image" />
+                    </a>
                 <td>
                     <a href="../issue/view/<%=data[i].id%>"><%=data[i].title%></a>
                 </td>
