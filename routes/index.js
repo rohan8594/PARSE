@@ -16,7 +16,7 @@ var creds = {
 router.get('/', function (req, res) {
     var pool = mysql.createPool(creds);
     var query1 = 'SELECT name FROM category';
-    var query2 = 'SELECT issue.id, issue.title, category.name, ' +
+    var query2 = 'SELECT issue.id, issue.title, category.name, issue.image, ' +
         'issue.description, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id;';
 
     var return_data = {};

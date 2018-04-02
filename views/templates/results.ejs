@@ -1,8 +1,8 @@
 <div class="page-data">
     <div class="data-table">
         <table border="1" cellpadding="7" cellspacing="7" align="center">
-            <tr>
-                <th>ID</th>
+            <tr><!--
+                <th>ID</th>  -->
                 <th>Preview</th>
                 <th>Title</th>
                 <th>Category</th>
@@ -14,8 +14,8 @@
 
             for(var i = 0;i < data.length;i++) { %>
 
-            <tr>
-                <td><%=data[i].id%></td>
+            <tr><!--
+                <td><%=data[i].id%></td> -->
                 <td>
                     <a href="../issue/view/<%=data[i].id%>">
                         <img src=<%=data[i].image%> class="thumbnail-image" />
