@@ -1,7 +1,17 @@
+/**
+ * @author Rohan Patel
+ */
+
 var express = require('express');
 var router = express.Router();
 
-/* GET search_results page. */
+/**
+ * This file contains middleware that handles GET requests to the search results page.
+ * Essentially, this file handles the search functionality. When a user searches for
+ * something, results are retrieved from the database for the user entered zip code and
+ * category, and those results are rendered on the search_results.ejs view.
+ */
+
 router.get('/', function (req, res, next) {
 
     var zip_code = req.query.zip_code;

@@ -1,3 +1,7 @@
+/**
+ * @author Rohan Patel, Dion Lagos
+ */
+
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -61,6 +65,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
