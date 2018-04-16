@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title><%= title %></title>
+    <title>My Account</title>
 
 
     <!-- Bootstrap core CSS -->
@@ -36,7 +36,7 @@
 
     <section class="jumbotron text-center">
         <div class="container">
-            <h1>Welcome, </h1>
+            <h1>Welcome, User!</h1>
             <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
             <p class="lead text-muted">
                 Environmental Reporting Tool<br>
@@ -48,33 +48,10 @@
     <div class="container">
         <!-- begin container -->
 
+
         <!-- End container -->
     </div>
-    <div>
 
-        <form action="/search_results" method="get" class="text-center">
-            <input id="title" type="text" name="zip_code" placeholder="Enter Zipcode:" class="col-md-8">
-            <select name="issue_category">
-                <% if(category.length){ %>
-                <option value="" selected>Select your category</option>
-                <% for(var i = 0;i < category.length;i++) { %>
-                <option><%= category[i].name %></option>
-                <% }
-
-                }else{ %>
-                <option>
-                    No categories
-                </option>
-                <% } %>
-            </select>
-            <button type="submit">Search</button>
-
-        </form>
-        &nbsp;
-        <div>
-            <% include templates/results.ejs %>
-        </div>
-    </div>
 </main>
 
 <footer class="text-muted">
