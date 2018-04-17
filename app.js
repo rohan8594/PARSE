@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var about = require('./routes/about');
 var search_results = require('./routes/search_results');
-var sign_up = require('./routes/sign_up');
-var sign_up_results = require('./routes/sign_up_results');
-
 var app = express();
 
 /* Database Connection Info */
@@ -45,8 +42,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/about', about);
 app.use('/search_results', search_results);
-app.use('/sign_up_results', sign_up_results);
-app.use('/sign_up', sign_up);
 app.use('*/images',express.static('public/images'));
 
 var port = Number(process.env.PORT ||3000);
