@@ -1,37 +1,42 @@
-/**
- * @author Rohan Patel, Dion Lagos
- */
-
 var express = require('express');
 var async = require('async');
 var router = express.Router();
 var mysql = require('mysql');
 
-/**
- * This file contains middleware that handles GET requests to the home page and
- * to the /issue/view/:id path. When a user requests the homepage, the first
- * middleware sub-stack will connect to the MySQL database, retrieve all the issue
- * information and render the index.ejs view.
- *
- * When a user clicks on an issue on the homepage, the next middleware sub-stack
- * will retrieve data of that issue from the database and render that data on the
- * display_issue.ejs view.
-*/
-
 var creds = {
+
     host: "us-cdbr-iron-east-05.cleardb.net",
     user: "b3220b75dccc0a",
     password: "ddd8323b",
     database: "heroku_d6fcf8fd2312a32"
+
 };
 
+/* GET home page. */
 router.get('/', function (req, res) {
+
     var pool = mysql.createPool(creds);
     var query1 = 'SELECT name FROM category';
-    var query2 = 'SELECT issue.id, issue.title, category.name, issue.image, ' +
+    var query2 = 'SELECT issue.id, issue.title, category.name, issue.thumbnail, ' +
         'issue.description, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id;';
 
     var return_data = {};
+
+     //init thumbnails folder if it doesn't exit
+     var fs = require('fs');
+     var dir = 'public/images/thumbnails';
+     if (!fs.existsSync(dir)){
+       fs.mkdirSync(dir);
+     }
+    //init thumbnail files if it doesn't exit
+   var thumb = require('node-thumbnail').thumb;
+   thumb({
+     source: 'public/images/issue_images', // could be a filename: dest/path/image.jpg
+     destination: 'public/images/thumbnails',
+     concurrency: 4
+   }, function(files, err, stdout, stderr) {
+      console.log('All done!');
+   });
 
     async.parallel([
         function (parallel_done) {
@@ -45,6 +50,7 @@ router.get('/', function (req, res) {
             pool.query(query2, {}, function (err, results) {
                 if (err) return parallel_done(err);
                 return_data.table2 = results;
+                console.log(results); //...............
                 parallel_done();
             });
         }
