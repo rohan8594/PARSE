@@ -12,6 +12,7 @@ h3 {
 .issue-image {
   width: 100%;
   height: 100%;
+  border-radius: 25px;
 }
 
 .about-bar {
@@ -54,6 +55,7 @@ body {
 
 .debug {
   border-style: solid;
+  border-radius: 20px;
 }
 
 
