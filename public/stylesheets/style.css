@@ -47,6 +47,12 @@ body {
   margin-bottom: 20px;
 }
 
+/* Search Result CSS */
+
+.home-search-result {
+  background-color: gray;
+}
+
 
 /* Original CSS with boostrap */
 
