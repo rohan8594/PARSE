@@ -2,6 +2,8 @@ var express = require('express');
 var async = require('async');
 var router = express.Router();
 var mysql = require('mysql');
+var fs = require('fs');
+var thumb = require('node-thumbnail').thumb;
 
 var creds = {
 
@@ -23,16 +25,14 @@ router.get('/', function (req, res) {
     var return_data = {};
 
      //init thumbnails folder if it doesn't exit
-     var fs = require('fs');
-     var dir = 'public/images/thumbnails';
+     var dir = '../public/images/thumbnails';
      if (!fs.existsSync(dir)){
        fs.mkdirSync(dir);
      }
     //init thumbnail files if it doesn't exit
-   var thumb = require('node-thumbnail').thumb;
    thumb({
-     source: 'public/images/issue_images', // could be a filename: dest/path/image.jpg
-     destination: 'public/images/thumbnails',
+     source: '../public/images/issue_images', // could be a filename: dest/path/image.jpg
+     destination: '../public/images/thumbnails',
      concurrency: 4
    }, function(files, err, stdout, stderr) {
       console.log('All done!');
@@ -50,7 +50,7 @@ router.get('/', function (req, res) {
             pool.query(query2, {}, function (err, results) {
                 if (err) return parallel_done(err);
                 return_data.table2 = results;
-                console.log(results); //...............
+                //console.log(results);
                 parallel_done();
             });
         }

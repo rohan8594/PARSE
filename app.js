@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var about = require('./routes/about');
 var search_results = require('./routes/search_results');
+
 var app = express();
 
 /* Database Connection Info */
@@ -30,7 +31,6 @@ app.use(
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -43,14 +43,6 @@ app.use('/', index);
 app.use('/about', about);
 app.use('/search_results', search_results);
 app.use('*/images',express.static('public/images'));
-
-var port = Number(process.env.PORT ||3000);
-
-app.listen(port);
-
-console.log("listening");
-
-console.log("Running at Port 3000");
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -69,7 +61,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 module.exports = app;
