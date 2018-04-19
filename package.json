@@ -18,18 +18,22 @@
   "homepage": "https://github.com/csc648-sp18/csc648-team04#readme",
   "dependencies": {
     "async": "^2.6.0",
+    "bcrypt": "^2.0.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "~1.18.2",
     "connect": "^3.6.6",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express-myconnection": "1.0.4",
+    "express-validator": "^5.1.2",
     "expressjs": "^1.0.1",
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
     "node-thumbnail": "^0.14.0",
-    "serve-favicon": "~2.4.5",
-    "serve-static": "^1.13.2"
+    "serve-static": "^1.13.2",
+    "passport": "^0.4.0",
+    "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
     "body-parser": "^1.18.2",
