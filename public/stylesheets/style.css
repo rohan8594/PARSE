@@ -53,9 +53,15 @@ body {
   margin-bottom: 20px;
 }
 
-.debug {
+.pane {
   border-style: solid;
   border-radius: 20px;
+}
+/* Search Result CSS */
+
+.home-search-result {
+  background-color: gray;
+  milestone-3-front
 }
 
 
