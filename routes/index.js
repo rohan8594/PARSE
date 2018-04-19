@@ -6,6 +6,7 @@ var express = require('express');
 var async = require('async');
 var router = express.Router();
 var mysql = require('mysql');
+var max = null;
 
 /**
  * This file contains middleware that handles GET requests to the home page and
@@ -73,6 +74,61 @@ router.get('/issue/view/:id', function (req, res, next) {
 
         //console.log(query.sql);
     });
+});
+
+
+router.get('/submit', function (req, res, next){
+    req.getConnection(function (err, connection) {
+
+        var query = connection.query('SELECT max(id) as id FROM issue', function (err, rows) {
+
+            if (err)
+                console.log("Error Selecting : %s ", err);
+
+            max = rows[0].id;
+            res.render('submit', {page_title: "Submit"});
+
+
+        });
+
+        //console.log(query.sql);
+    });
+});
+
+router.post('/post_issue', function (req, res) {
+    var title = req.body.title;
+    var desc = req.body.description;
+    var zipcode = req.body.zipcode;
+
+    req.checkBody('title', 'Title is required').notEmpty();
+    req.checkBody('description', 'Description is required').notEmpty();
+    req.checkBody('zipcode', 'Zip Code is required.').notEmpty();
+
+    var errors = req.validationErrors();
+
+    if(errors)
+        res.render('submit',{
+            errors:errors
+        });
+    max = max + 1;
+    var data = {
+        id: max,
+        title: title,
+        description: desc,
+        zipcode: zipcode
+    };
+
+    req.getConnection(function (err, connection) {
+
+        var query = connection.query(
+            'INSERT INTO issue set ?', data, function (err, rows) {
+                if (err)
+                    console.log("Error Inserting : %s ", err);
+                res.redirect('/');
+            });
+
+    });
+
 });
 
 module.exports = router;

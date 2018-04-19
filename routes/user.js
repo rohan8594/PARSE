@@ -17,6 +17,7 @@ router.get('/register', function (req, res, next) {
 
 router.post('/signup', function(req, res){
     var username = req.body.username;
+    var name = req.body.name;
     var password = req.body.password;
     var password2 = req.body.password2;
 
@@ -35,8 +36,8 @@ router.post('/signup', function(req, res){
             bcrypt.hash(password, salt, function(err, hash) {
 
                 var data = {
-                    user_id: '103',
-                    name: username,
+                    user_id: username,
+                    name: name,
                     password: hash
                 };
 

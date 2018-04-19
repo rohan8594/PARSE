@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Register</title>
+    <title>Submit</title>
 
 
     <!-- Bootstrap core CSS -->
@@ -59,29 +59,24 @@
         <div class="alert alert-danger"><%=errors[i].msg%> </div>
 
         <%}}%>
-        <form method="post" action="/user/signup">
+        <form method="post" action="/post_issue">
 
             <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" placeholder="Username" name="username">
+                <label>Title</label>
+                <input type="text" class="form-control" placeholder="Title" name="title">
             </div>
 
             <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" placeholder="Name" name="Name">
+                <label>Description</label>
+                <input type="text" class="form-control" placeholder="Description" name="description">
             </div>
 
             <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password" name="password">
+                <label>Zip Code</label>
+                <input type="text" class="form-control" placeholder="Zip Code" name="zipcode">
             </div>
 
-            <div class="form-group">
-                <label>Confirm Password</label>
-                <input type="password" class="form-control" placeholder="Password" name="password2">
-            </div>
-
-            <button type="submit" class="btn btn-default">Login</button>
+            <button type="submit" class="btn btn-default">Submit</button>
         </form>
 
     </div>
