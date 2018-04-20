@@ -51,6 +51,9 @@ body {
 
 .home-search-result {
   background-color: gray;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
 }
 
 
