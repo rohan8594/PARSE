@@ -53,6 +53,10 @@ body {
   margin-bottom: 20px;
 }
 
+h1{
+  font-family: sans-serif;
+}
+
 .pane {
   border-style: solid;
   border-radius: 20px;
