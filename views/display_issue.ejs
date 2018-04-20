@@ -31,14 +31,13 @@
                 <h1><%=data[0].title%></h1>
                 <img class="issue-image" src=<%=data[0].image%> />   
                 <div class="fields">
-                    
+                    <p>Location: <%=data[0].zipcode%></p>
                 </div>    
             </div>
             <!-- google maps pane -->
             <div class="col-md-6 pane">
                 <%include templates/google-maps.ejs%>
             </div>
-             
         </div>
     </div>
 
