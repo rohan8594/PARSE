@@ -31,7 +31,10 @@
                 <h1><%=data[0].title%></h1>
                 <img class="issue-image" src=<%=data[0].image%> />   
                 <div class="fields">
-                    <p>Location: <%=data[0].zipcode%></p>
+                    <h2 class="field-title">Location: </h2>
+                    <p><%=data[0].zipcode%></p>
+                    <h2 class="field-title">Description:</h2>
+                    <p><%=data[0].description%></p>
                 </div>    
             </div>
             <!-- google maps pane -->
