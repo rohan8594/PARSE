@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title><%= title %></title>
+    <title>Submit</title>
 
 
     <!-- Bootstrap core CSS -->
@@ -30,14 +31,12 @@
     <!--  BEGIN NAVIGATION BAR -->
     <% include templates/navigation.ejs %>
     <!-- END OF NAVIGATION BAR -->
-    <% include templates/search_bar_template.ejs %>
 </header>
 
 <main role="main">
 
     <section class="jumbotron text-center">
         <div class="container">
-            <h1>Welcome, </h1>
             <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
             <p class="lead text-muted">
                 Environmental Reporting Tool<br>
@@ -49,58 +48,38 @@
     <div class="container">
         <!-- begin container -->
 
-      <div>
 
-        <!-- Begin search form -->
-          <form action="/search_results" method="get" class="text-center">
-              <input id="title" type="text" name="zip_code" placeholder="Enter Zipcode:" class="col-md-8">
-              <select name="issue_category">
-                  <% if(category.length){ %>
-                  <option value="" selected>Select your category</option>
-                  <% for(var i = 0;i < category.length;i++) { %>
-                  <option><%= category[i].name %></option>
-                  <% }
-
-                  }else{ %>
-                  <option>
-                      No categories
-                  </option>
-                  <% } %>
-              </select>
-              <button type="submit">Search</button>
-
-          </form>
-          &nbsp;
-
-          <!-- End search form -->
-
-          <div class="row">
-            <!-- Begin search results -->
-
-            <% if(data.length){
-
-            for(var i = 0;i < data.length;i++) { %>
-
-            <% include templates/single_search_result.ejs %>
-
-            <% }
-
-            }else{ %>
-            
-
-            No issues
-
-
-            <% } %>
-
-
-            <!-- End Search results -->
-          </div>
-      </div>
-
-            <!-- End container -->
+        <!-- End container -->
     </div>
+    <div class="col-md-4">
+        <% if(locals.errors){
 
+        for(var i = 0;i < errors.length;i++) { %>
+
+        <div class="alert alert-danger"><%=errors[i].msg%> </div>
+
+        <%}}%>
+        <form method="post" action="/post_issue">
+
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" placeholder="Title" name="title">
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="form-control" placeholder="Description" name="description">
+            </div>
+
+            <div class="form-group">
+                <label>Zip Code</label>
+                <input type="text" class="form-control" placeholder="Zip Code" name="zipcode">
+            </div>
+
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+    </div>
 </main>
 
 <footer class="text-muted">

@@ -11,6 +11,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
 <link rel='stylesheet' href='/stylesheets/register.css'/>
+    <!-- Google Analytics snippet -->
+    <% include templates/google-analytics.ejs %>
 
 </head>
 
@@ -23,23 +25,30 @@
 	<div class="container-fluid bg">
 	  <div class="row">
 	  	<div class="col-md-4 col-sm-4 col-xs-12"></div>
-	  	<div class="col-md-4 col-sm-4 col-xs-12">	
-				<form class="form-container">
+	  	<div class="col-md-4 col-sm-4 col-xs-12">
+            <% if(locals.errors){
+
+            for(var i = 0;i < errors.length;i++) { %>
+
+            <div class="alert alert-danger"><%=errors[i].msg%> </div>
+
+            <%}}%>
+				<form class="form-container" method="post" action="/user/signup">
 				  <h1>PARSE Registration</h1>	
 				  <div class="form-group">
-				    <input type="firstname" class="form-control" id="exampleFName" placeholder="First Name">
+				    <input type="firstname" class="form-control" id="exampleUName" placeholder="Username" name="username">
 				  </div>
 				  <div class="form-group">
-				    <input type="lastname" class="form-control" id="exampleLName" placeholder="Last Name">
+				    <input type="lastname" class="form-control" id="exampleName" placeholder="Name" name="Name">
 				  </div>
 				  <div class="form-group">
 				    <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email Address">
 				  </div>
 				  <div class="form-group">
-				    <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+				    <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" name="password">
 				  </div>
 				  <div class="form-group">
-				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Verify Password">
+				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Verify Password" name="password2">
 				  </div>
 				  <div class="checkbox">
 				    <label>
@@ -53,5 +62,4 @@
 	  </div>
 	</div>
 </body>
-
 </html>

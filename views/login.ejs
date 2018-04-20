@@ -1,5 +1,5 @@
 <! -- login.ejs -->
-</!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Login</title>
@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 <link rel='stylesheet' href='/stylesheets/login.css'/>
+    <% include templates/google-analytics.ejs %>
 </head>
 
 
@@ -22,15 +23,15 @@
 	  <div class="row">
 	  	<div class="col-md-4 col-sm-4 col-xs-12"></div>
 	  	<div class="col-md-4 col-sm-4 col-xs-12">	
-				<form class="form-container">
+				<form class="form-container" method="post" action="/user/login">
 				  <h1>PARSE Login</h1>	
 				  <div class="form-group">
-				    <label for="exampleInputEmail1">Email address</label>
-				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                      <label for="Username">Username</label>
+                      <input type="text" class="form-control" name="username" placeholder="Username" >
 				  </div>
 				  <div class="form-group">
-				    <label for="exampleInputPassword1">Password</label>
-				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      <label for="Password">Password</label>
+                      <input type="password" class="form-control" name="password" placeholder="Password">
 				  </div>
 				  <div class="checkbox">
 				    <label>
@@ -44,5 +45,4 @@
 	  </div>
 	</div>
 </body>
-
 </html>

@@ -1,16 +1,15 @@
-/**
- * @author Rohan Patel, Dion Lagos
- */
-
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var expressValidator = require('express-validator');
 
 var index = require('./routes/index');
 var about = require('./routes/about');
 var search_results = require('./routes/search_results');
+var user = require('./routes/user');
 
 var app = express();
 
@@ -42,10 +41,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressValidator());
+
 
 app.use('/', index);
 app.use('/about', about);
 app.use('/search_results', search_results);
+app.use('/user', user);
 app.use('*/images',express.static('public/images'));
 
 // catch 404 and forward to error handler
@@ -65,5 +67,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

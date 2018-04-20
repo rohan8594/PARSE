@@ -1,11 +1,11 @@
-/**
- * @author Rohan Patel, Dion Lagos
- */
-
 var express = require('express');
 var async = require('async');
 var router = express.Router();
 var mysql = require('mysql');
+var fs = require('fs');
+var thumb = require('node-thumbnail').thumb;
+
+var max = null;
 
 /**
  * This file contains middleware that handles GET requests to the home page and
@@ -19,19 +19,37 @@ var mysql = require('mysql');
 */
 
 var creds = {
+
     host: "us-cdbr-iron-east-05.cleardb.net",
     user: "b3220b75dccc0a",
     password: "ddd8323b",
     database: "heroku_d6fcf8fd2312a32"
+
 };
 
+/* GET home page. */
 router.get('/', function (req, res) {
+
     var pool = mysql.createPool(creds);
     var query1 = 'SELECT name FROM category';
-    var query2 = 'SELECT issue.id, issue.title, category.name, issue.image, ' +
+    var query2 = 'SELECT issue.id, issue.title, category.name, issue.thumbnail, ' +
         'issue.description, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id;';
 
     var return_data = {};
+
+     //init thumbnails folder if it doesn't exit
+     var dir = '../public/images/thumbnails';
+     if (!fs.existsSync(dir)){
+       fs.mkdirSync(dir);
+     }
+    //init thumbnail files if it doesn't exit
+   thumb({
+     source: '../public/images/issue_images', // could be a filename: dest/path/image.jpg
+     destination: '../public/images/thumbnails',
+     concurrency: 4
+   }, function(files, err, stdout, stderr) {
+      console.log('All done!');
+   });
 
     async.parallel([
         function (parallel_done) {
@@ -45,6 +63,7 @@ router.get('/', function (req, res) {
             pool.query(query2, {}, function (err, results) {
                 if (err) return parallel_done(err);
                 return_data.table2 = results;
+                //console.log(results);
                 parallel_done();
             });
         }
@@ -73,6 +92,61 @@ router.get('/issue/view/:id', function (req, res, next) {
 
         //console.log(query.sql);
     });
+});
+
+
+router.get('/submit', function (req, res, next){
+    req.getConnection(function (err, connection) {
+
+        var query = connection.query('SELECT max(id) as id FROM issue', function (err, rows) {
+
+            if (err)
+                console.log("Error Selecting : %s ", err);
+
+            max = rows[0].id;
+            res.render('submit', {page_title: "Submit"});
+
+
+        });
+
+        //console.log(query.sql);
+    });
+});
+
+router.post('/post_issue', function (req, res) {
+    var title = req.body.title;
+    var desc = req.body.description;
+    var zipcode = req.body.zipcode;
+
+    req.checkBody('title', 'Title is required').notEmpty();
+    req.checkBody('description', 'Description is required').notEmpty();
+    req.checkBody('zipcode', 'Zip Code is required.').notEmpty();
+
+    var errors = req.validationErrors();
+
+    if(errors)
+        res.render('submit',{
+            errors:errors
+        });
+    max = max + 1;
+    var data = {
+        id: max,
+        title: title,
+        description: desc,
+        zipcode: zipcode
+    };
+
+    req.getConnection(function (err, connection) {
+
+        var query = connection.query(
+            'INSERT INTO issue set ?', data, function (err, rows) {
+                if (err)
+                    console.log("Error Inserting : %s ", err);
+                res.redirect('/');
+            });
+
+    });
+
 });
 
 module.exports = router;
