@@ -17,9 +17,13 @@ router.get('/register', function (req, res, next) {
 
 router.post('/signup', function(req, res){
     var username = req.body.username;
-    var name = req.body.name;
+    var name = req.body.Name;
     var password = req.body.password;
     var password2 = req.body.password2;
+
+    console.log(req.body.username)
+    console.log(req.body.Name)
+    console.log(req.body.password)
 
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
