@@ -25,12 +25,18 @@
     </header>
     
     <div class="container">
+        <!-- Image pane -->
         <div class="row">
             <div class="col-md-6 pane">
-                <img class="issue-image" src=<%=data[0].image%> />       
+                <h1><%=data[0].title%></h1>
+                <img class="issue-image" src=<%=data[0].image%> />   
+                <div class="fields">
+                    
+                </div>    
             </div>
+            <!-- google maps pane -->
             <div class="col-md-6 pane">
-                
+                <%include templates/google-maps.ejs%>
             </div>
              
         </div>
