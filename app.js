@@ -24,7 +24,8 @@ app.use(
         host: "us-cdbr-iron-east-05.cleardb.net",
         user: "b3220b75dccc0a",
         password: "ddd8323b",
-        database: "heroku_d6fcf8fd2312a32"
+        database: "heroku_d6fcf8fd2312a32",
+        multipleStatements: true
 
     },'pool') //or single
 
