@@ -10,13 +10,6 @@
     <title><%= title %></title>
 
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-
     <!-- Stylesheets -->
     <% include templates/stylesheet-refs.ejs %>
 
@@ -30,7 +23,6 @@
     <!--  BEGIN NAVIGATION BAR -->
     <% include templates/navigation.ejs %>
     <!-- END OF NAVIGATION BAR -->
-    <% include templates/search_bar_template.ejs %>
 </header>
 
 <main role="main">
@@ -49,54 +41,8 @@
     <div class="container">
         <!-- begin container -->
 
-      <div>
 
-        <!-- Begin search form -->
-          <form action="/search_results" method="get" class="text-center">
-              <input id="title" type="text" name="zip_code" placeholder="Enter Zipcode:" class="col-md-8">
-              <select name="issue_category">
-                  <% if(category.length){ %>
-                  <option value="" selected>Select your category</option>
-                  <% for(var i = 0;i < category.length;i++) { %>
-                  <option><%= category[i].name %></option>
-                  <% }
-
-                  }else{ %>
-                  <option>
-                      No categories
-                  </option>
-                  <% } %>
-              </select>
-              <button type="submit">Search</button>
-
-          </form>
-          &nbsp;
-
-          <!-- End search form -->
-
-          <div class="row">
-            <!-- Begin search results -->
-
-            <% if(data.length){
-
-            for(var i = 0;i < data.length;i++) { %>
-
-            <% include templates/single_search_result.ejs %>
-
-            <% }
-
-            }else{ %>
-            
-
-            No issues
-
-
-            <% } %>
-
-
-            <!-- End Search results -->
-          </div>
-      </div>
+        <% include templates/results.ejs %>
 
             <!-- End container -->
     </div>
