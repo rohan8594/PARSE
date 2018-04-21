@@ -25,13 +25,20 @@
                     <input id="title" type="text" name="zip_code" placeholder="Enter Zipcode:" class="col-md-8">
                 </div>
 
-                <!-- Note from Charlie: I removed the old categories dropdown menu because the "category" data item couldn't be resolved on the other pages. I put the code in search_bar_categories.ejs as a template in case we want to inject it back in. -->
 
                 <div class="col-md-3">
                     <select name="issue_category">
+                        <% if(category.length){ %>
                         <option value="" selected>Select your category</option>
-                        <option>Pollution</option>
-                        <option>Accident</option>
+                        <% for(var i = 0;i < category.length;i++) { %>
+                        <option><%= category[i].name %></option>
+                        <% }
+
+                        }else{ %>
+                        <option>
+                            No categories
+                        </option>
+                        <% } %>
                     </select>
                 </div>
 
