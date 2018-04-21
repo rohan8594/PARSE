@@ -1,11 +1,11 @@
 <div class="col-md-4">
-	<div class="home-search-result"
+	<div class="home-search-result">
 		<a href="../issue/view/<%=data[i].id%>">
 		    <img src=<%=data[i].image%> class="thumbnail-image" />
 		</a>
 
-		<h3><a href="../issue/view/<%=data[i].id%>"><%=data[i].title%></a></h3>
-		<span><%=data[i].name%></span>
-		<span><%=data[i].zipcode%></span>
+		<h5><a href="../issue/view/<%=data[i].id%>"><%=data[i].title%></a></h5>
+		<span id="search-result-name"><%=data[i].name%></span><br/>
+		<span id="search-result-zipcode"><%=data[i].zipcode%></span>
 	</div>
 </div>
