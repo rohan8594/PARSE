@@ -10,8 +10,8 @@ h3 {
 }
 
 .issue-image {
-  width: 100%;
-  height: 100%;
+  width: 75%;
+  height: 75%;
   border-radius: 25px;
 }
 
@@ -35,10 +35,14 @@ h3 {
   border-radius: 50%;
 }
 
+.field-title {
+  color: black;
+  font-family: sans-serif;
+}
+
 /* Navbar code */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+
 }
 
 /* Results display code */
@@ -46,19 +50,20 @@ body {
   height: 80px;
   width: 80px;
   border-radius: 10%;
-
 }
 
 .navbar {
-  margin-bottom: 20px;
+  
 }
 
+/*listing title*/
 h1{
   font-family: sans-serif;
 }
 
+/*details pane*/
 .pane {
-  border-style: solid;
+  /*border-style: solid;*/
   border-radius: 20px;
 }
 /* Search Result CSS */
