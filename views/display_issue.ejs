@@ -25,16 +25,19 @@
     </header>
     
     <div class="container">
+        <a href="/" class="btn btn-info">Back to search results</a>
         <!-- Image pane -->
         <div class="row">
             <div class="col-md-6 pane">
                 <h1><%=data[0].title%></h1>
                 <img class="issue-image" src=<%=data[0].image%> />   
                 <div class="fields">
-                    <h2 class="field-title">Location: </h2>
+                    <h2 class="field-title">Zip-code: </h2>
                     <p><%=data[0].zipcode%></p>
                     <h2 class="field-title">Description:</h2>
                     <p><%=data[0].description%></p>
+                    <h2 class="field-title">Issue status: </h2>
+                    
                 </div>    
             </div>
             <!-- google maps pane -->

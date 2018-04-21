@@ -42,7 +42,7 @@ h3 {
 
 /* Navbar code */
 body {
-  
+
 }
 
 /* Results display code */
@@ -53,7 +53,7 @@ body {
 }
 
 .navbar {
-
+  
 }
 
 /*listing title*/
@@ -63,7 +63,7 @@ h1{
 
 /*details pane*/
 .pane {
-  border-style: solid;
+  /*border-style: solid;*/
   border-radius: 20px;
 }
 /* Search Result CSS */
