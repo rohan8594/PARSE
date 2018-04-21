@@ -50,10 +50,32 @@ body {
 /* Search Result CSS */
 
 .home-search-result {
-  background-color: gray;
+  background-color: #b9d1f7;
+  box-shadow: 1px 1px 1px #484f5b;
   border-radius: 5px;
-  padding: 10px;
+  padding: 20px;
   margin: 5px;
+}
+
+.home-search-result > a > img {
+  display: block;
+  margin: auto;
+}
+
+.home-search-result > h5 {
+  text-align: center;
+}
+
+.home-search-result > p {
+  text-align: center;
+}
+
+#search-result-name {
+  text-align: center;
+}
+
+#search-result-zipcode {
+
 }
 
 
