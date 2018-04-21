@@ -53,8 +53,9 @@ body {
   background-color: #b9d1f7;
   box-shadow: 1px 1px 1px #484f5b;
   border-radius: 5px;
-  padding: 20px;
+  padding: 10px;
   margin: 5px;
+  min-height: 220px;
 }
 
 .home-search-result > a > img {
