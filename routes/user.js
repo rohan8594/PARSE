@@ -2,12 +2,33 @@ var express = require('express');
 var async = require('async');
 var router = express.Router();
 var mysql = require('mysql');
-var bcrypt = require('bcryptjs');
+var bcrypt = require('bcrypt-nodejs');
+var passport = require('passport');
 
-
-router.get('/login', function (req, res, next) {
-   res.render('login');
+router.get('/my_account', function(req, res){
+   res.render('my_account', { message: req.flash('loginMessage') });
 });
+
+
+router.get('/login', function(req, res) {
+    res.render('login', { message: req.flash('loginMessage') });
+});
+
+router.post('/login', passport.authenticate('local-login', {
+        successRedirect : '/user/my_account',
+        failureRedirect : '/user/login',
+        failureFlash : true
+    }),
+    function(req, res) {
+        if (req.body.rememberMe) {
+            req.session.cookie.maxAge = 1000 * 60 * 3;
+        } else {
+            req.session.cookie.expires = false;
+        }
+        res.redirect('/');
+    });
+
+
 
 router.get('/register', function (req, res, next) {
     res.render('register');
@@ -36,13 +57,11 @@ router.post('/signup', function(req, res){
             errors:errors
         });
     } else {
-        bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(password, salt, function(err, hash) {
 
                 var data = {
                     user_id: username,
                     name: name,
-                    password: hash
+                    password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
                 };
 
                 req.getConnection(function (err, connection) {
@@ -55,10 +74,6 @@ router.post('/signup', function(req, res){
                         });
 
                 });
-
-            });
-        });
-
     }
 });
 
