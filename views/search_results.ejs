@@ -40,14 +40,30 @@
     <div class="container">
         <!-- begin container -->
 
+        <div class="row">
+            <!-- Begin search results -->
 
+            <% if(data.length){
+
+            for(var i = 0;i < data.length;i++) { %>
+
+            <% include templates/single_search_result.ejs %>
+
+            <% }
+
+            }else{ %>
+
+
+            No issues
+
+
+            <% } %>
+
+
+            <!-- End Search results -->
+        </div>
 
         <!-- End container -->
-    </div>
-    <div>
-        <div>
-            <% include templates/results.ejs %>
-        </div>
     </div>
 </main>
 
