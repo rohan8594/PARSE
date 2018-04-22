@@ -13,7 +13,6 @@
     <% include templates/google-analytics.ejs %>
 </head>
 
-
 <body>
 <!--  BEGIN NAVIGATION BAR -->
 <% include templates/navigation.ejs %>
@@ -21,8 +20,11 @@
 
 	<div class="container-fluid bg">
 	  <div class="row">
-	  	<div class="col-md-4 col-sm-4 col-xs-12"></div>
-	  	<div class="col-md-4 col-sm-4 col-xs-12">	
+          <% if (message.length > 0) { %>
+          <div class="alert alert-danger"><%= message %></div>
+          <% } %>
+          <div class="col-md-4 col-sm-4 col-xs-12"></div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
 				<form class="form-container" method="post" action="/user/login">
 				  <h1>PARSE Login</h1>	
 				  <div class="form-group">
@@ -40,7 +42,7 @@
 				  </div>
 				  <button type="submit" class="btn btn-success btn-block">Submit</button>
 				</form>
-	    </div>	
+	    </div>
 	  <div class="col-md-4 col-sm-4 col-xs-12"></div>
 	  </div>
 	</div>
