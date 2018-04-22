@@ -59,7 +59,7 @@
         <div class="alert alert-danger"><%=errors[i].msg%> </div>
 
         <%}}%>
-        <form method="post" action="/post_issue">
+        <form method="post" enctype="multipart/form-data" action="/post_issue">
 
             <div class="form-group">
                 <label>Title</label>
@@ -74,6 +74,28 @@
             <div class="form-group">
                 <label>Zip Code</label>
                 <input type="text" class="form-control" placeholder="Zip Code" name="zipcode">
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <select name="issue_category" class="form-control">
+                    <% if(category.length){ %>
+                    <option value="" selected>Select your category</option>
+                    <% for(var i = 0;i < category.length;i++) { %>
+                    <option><%= category[i].name %></option>
+                    <% }
+
+                    }else{ %>
+                    <option>
+                        No categories
+                    </option>
+                    <% } %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Upload image below</label>
+                <input type="file" class="form-control" name="issue_image">
             </div>
 
             <button type="submit" class="btn btn-default">Submit</button>

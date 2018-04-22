@@ -4,19 +4,18 @@ var router = express.Router();
 var mysql = require('mysql');
 var fs = require('fs');
 var thumb = require('node-thumbnail').thumb;
+var multer  = require('multer');
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null,'../public/images/issue_images/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname)
+    }
+});
+var upload = multer({ storage: storage });
 
 var max = null;
-
-/**
- * This file contains middleware that handles GET requests to the home page and
- * to the /issue/view/:id path. When a user requests the homepage, the first
- * middleware sub-stack will connect to the MySQL database, retrieve all the issue
- * information and render the index.ejs view.
- *
- * When a user clicks on an issue on the homepage, the next middleware sub-stack
- * will retrieve data of that issue from the database and render that data on the
- * display_issue.ejs view.
-*/
 
 var creds = {
 
@@ -98,13 +97,13 @@ router.get('/issue/view/:id', function (req, res, next) {
 router.get('/submit', function (req, res, next){
     req.getConnection(function (err, connection) {
 
-        var query = connection.query('SELECT max(id) as id FROM issue', function (err, rows) {
+        var query = connection.query("SELECT max(id) as id FROM issue; SELECT name FROM category", [1,2], function (err, rows) {
 
             if (err)
                 console.log("Error Selecting : %s ", err);
 
-            max = rows[0].id;
-            res.render('submit', {page_title: "Submit"});
+            max = rows[0][0].id;
+            res.render('submit', {page_title: "Submit", category:rows[1]});
 
 
         });
@@ -113,16 +112,20 @@ router.get('/submit', function (req, res, next){
     });
 });
 
-router.post('/post_issue', function (req, res) {
+router.post('/post_issue', upload.single('issue_image'), function (req, res) {
     var title = req.body.title;
     var desc = req.body.description;
     var zipcode = req.body.zipcode;
+    var category = req.body.issue_category;
+    var filename = req.file.filename;
 
     req.checkBody('title', 'Title is required').notEmpty();
     req.checkBody('description', 'Description is required').notEmpty();
     req.checkBody('zipcode', 'Zip Code is required.').notEmpty();
+    req.checkBody('issue_category', 'Category is required').notEmpty();
 
     var errors = req.validationErrors();
+
 
     if(errors)
         res.render('submit',{
@@ -133,13 +136,15 @@ router.post('/post_issue', function (req, res) {
         id: max,
         title: title,
         description: desc,
-        zipcode: zipcode
+        zipcode: zipcode,
     };
 
     req.getConnection(function (err, connection) {
 
         var query = connection.query(
-            'INSERT INTO issue set ?', data, function (err, rows) {
+            "INSERT INTO issue (id, title, description, zipcode, category, image) VALUES (" + max + ",'" + title + "','"
+            + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
+            + filename + "')", function (err, rows) {
                 if (err)
                     console.log("Error Inserting : %s ", err);
                 res.redirect('/');
