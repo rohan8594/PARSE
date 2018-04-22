@@ -119,6 +119,12 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
     var category = req.body.issue_category;
     var filename = req.file.filename;
 
+    //generating thumbail filename
+    var f_name = filename.substring(0, filename.indexOf('.')) + '_thumb';
+    var ext = filename.substring(filename.indexOf('.'));
+    var thumnail_fname = f_name + ext;
+
+
     req.checkBody('title', 'Title is required').notEmpty();
     req.checkBody('description', 'Description is required').notEmpty();
     req.checkBody('zipcode', 'Zip Code is required.').notEmpty();
@@ -142,9 +148,9 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
     req.getConnection(function (err, connection) {
 
         var query = connection.query(
-            "INSERT INTO issue (id, title, description, zipcode, category, image) VALUES (" + max + ",'" + title + "','"
+            "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail) VALUES (" + max + ",'" + title + "','"
             + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
-            + filename + "')", function (err, rows) {
+            + filename + "','/images/thumbnails/" + thumnail_fname + "')", function (err, rows) {
                 if (err)
                     console.log("Error Inserting : %s ", err);
                 res.redirect('/');
