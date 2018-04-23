@@ -117,6 +117,8 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
     var desc = req.body.description;
     var zipcode = req.body.zipcode;
     var category = req.body.issue_category;
+    var latitude = req.body.Lat;
+    var longitude = req.body.Lng;
     var filename = req.file.filename;
 
     //generating thumbail filename
@@ -132,25 +134,18 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
 
     var errors = req.validationErrors();
 
-
     if(errors)
         res.render('submit',{
             errors:errors
         });
     max = max + 1;
-    var data = {
-        id: max,
-        title: title,
-        description: desc,
-        zipcode: zipcode,
-    };
 
     req.getConnection(function (err, connection) {
 
         var query = connection.query(
-            "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail) VALUES (" + max + ",'" + title + "','"
+            "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude) VALUES (" + max + ",'" + title + "','"
             + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
-            + filename + "','/images/thumbnails/" + thumnail_fname + "')", function (err, rows) {
+            + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "')", function (err, rows) {
                 if (err)
                     console.log("Error Inserting : %s ", err);
                 res.redirect('/');

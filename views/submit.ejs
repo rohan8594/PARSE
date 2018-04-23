@@ -72,8 +72,15 @@
             </div>
 
             <div class="form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" placeholder="Enter Address" name="address" id="search_term">
+                <input type="hidden" id="Latitude" name="Lat" />
+                <input type="hidden" id="Longitude" name="Lng" />
+            </div>
+
+            <div class="form-group">
                 <label>Zip Code</label>
-                <input type="text" class="form-control" placeholder="Zip Code" name="zipcode">
+                <input type="text" class="form-control" placeholder="Zip Code" name="zipcode" id="zip_code">
             </div>
 
             <div class="form-group">
@@ -121,6 +128,27 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- Script references -->
 <% include templates/javascript-refs.ejs %>
+
+<!-- get latitude and longitude from google places api -->
+<script>
+    function activatePlacesSearch() {
+        var input = document.getElementById('search_term');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            document.getElementById('Latitude').value = place.geometry.location.lat();
+            document.getElementById('Longitude').value = place.geometry.location.lng();
+            for(var i = 0; i < place.address_components.length; i++) {
+                for(var j = 0; j < place.address_components[i].types.length; j++) {
+                    if(place.address_components[i].types[j] == "postal_code") {
+                        document.getElementById('zip_code').value = place.address_components[i].long_name;
+                    }
+                }
+            }
+        });
+    }
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABYQ3l89zm1uFz95T1gJQFEbwKAkzMV3Q&libraries=places&callback=activatePlacesSearch"></script>
 
 </body>
 </html>
