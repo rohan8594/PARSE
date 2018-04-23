@@ -7,7 +7,7 @@ var thumb = require('node-thumbnail').thumb;
 var multer  = require('multer');
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null,'../public/images/issue_images/')
+        cb(null,'public/images/issue_images/')
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + file.originalname)
