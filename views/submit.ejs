@@ -87,7 +87,6 @@
                 <label>Category</label>
                 <select name="issue_category" class="form-control">
                     <% if(category.length){ %>
-                    <option value="" selected>Select your category</option>
                     <% for(var i = 0;i < category.length;i++) { %>
                     <option><%= category[i].name %></option>
                     <% }
