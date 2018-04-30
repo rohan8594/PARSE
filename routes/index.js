@@ -5,10 +5,9 @@ var mysql = require('mysql');
 var fs = require('fs');
 var thumb = require('node-thumbnail').thumb;
 var multer  = require('multer');
-var path = require('path');
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null,path.resolve('../public/images/issue_images/'))
+        cb(null,'public/images/issue_images/')
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + file.originalname)
@@ -38,14 +37,14 @@ router.get('/', function (req, res) {
     var return_data = {};
 
     //init thumbnails folder if it doesn't exit
-    var dir = path.resolve('../public/images/thumbnails');
+    var dir = 'public/images/thumbnails';
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
     }
     //init thumbnail files if it doesn't exit
     thumb({
-        source: path.resolve('../public/images/issue_images'), // could be a filename: dest/path/image.jpg
-        destination: path.resolve('../public/images/thumbnails'),
+        source: 'public/images/issue_images', // could be a filename: dest/path/image.jpg
+        destination: 'public/images/thumbnails',
         concurrency: 4
     }, function(files, err, stdout, stderr) {
         console.log('All done!');
