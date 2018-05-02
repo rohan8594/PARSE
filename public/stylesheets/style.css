@@ -1,5 +1,4 @@
 /* The following is added manually */
-/* More Comments */
 
 h2 {
   color: white;
@@ -97,6 +96,13 @@ h1{
 
 #search-result-zipcode {
 
+}
+
+
+/* SUBMIT AN ISSUE PAGE css */
+#submit-issue-desc-field {
+  height: 200px;
+  text-align: 
 }
 
 
