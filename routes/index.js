@@ -69,7 +69,7 @@ router.get('/', function (req, res) {
         }
     ], function (err) {
         if (err) console.log(err);
-        pool.end();
+        //pool.end();
         res.render('index', {title: "Team 04", category: return_data.table1, data: return_data.table2});
     });
 });
