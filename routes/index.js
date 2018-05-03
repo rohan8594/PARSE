@@ -3,6 +3,7 @@ var async = require('async');
 var router = express.Router();
 var mysql = require('mysql');
 var fs = require('fs');
+var bcrypt = require('bcrypt-nodejs');
 var thumb = require('node-thumbnail').thumb;
 var multer  = require('multer');
 var storage = multer.diskStorage({
@@ -95,6 +96,10 @@ router.get('/issue/view/:id', function (req, res, next) {
 
 
 router.get('/submit', function (req, res, next){
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+    }
     req.getConnection(function (err, connection) {
 
         var query = connection.query("SELECT max(id) as id FROM issue; SELECT name FROM category", [1,2], function (err, rows) {
@@ -103,7 +108,7 @@ router.get('/submit', function (req, res, next){
                 console.log("Error Selecting : %s ", err);
 
             max = rows[0][0].id;
-            res.render('submit', {page_title: "Submit", category:rows[1]});
+            res.render('submit', {page_title: "Submit", category:rows[1], isLogged:isLoggedIn});
 
 
         });
@@ -131,27 +136,83 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
     req.checkBody('description', 'Description is required').notEmpty();
     req.checkBody('zipcode', 'Zip Code is required.').notEmpty();
 
-    var errors = req.validationErrors();
 
-    if(errors)
-        res.render('submit',{
-            errors:errors
-        });
-    max = max + 1;
+    /* CHECK IF USER IS LOGGED IN */
+    if(!req.isAuthenticated()){
+        var username = req.body.username;
+        var name = req.body.Name;
+        var password = req.body.password;
+        var password2 = req.body.password2;
+        req.checkBody('username', 'Username is required').notEmpty();
+        req.checkBody('password', 'Password is required').notEmpty();
+        req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
-    req.getConnection(function (err, connection) {
+        var errorList = req.validationErrors();
 
-        var query = connection.query(
-            "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude) VALUES (" + max + ",'" + title + "','"
-            + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
-            + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "')", function (err, rows) {
-                if (err)
-                    console.log("Error Inserting : %s ", err);
-                res.redirect('/');
+        if(errorList)
+            res.render('submit',{
+                errors:errorList
             });
+        max = max + 1;
 
-    });
+        var data = {
+            user_id: username,
+            name: name,
+            password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+        };
 
+        req.getConnection(function (err, connection) {
+
+
+            var query = connection.query(
+                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude) VALUES (" + max + ",'" + title + "','"
+                + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
+                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "');"
+                + "INSERT INTO user set ?", data,
+                function (err, rows) {
+                    if (err)
+                        console.log("Error Inserting : %s ", err);
+                    res.redirect('/');
+                });
+
+        });
+
+    } else {
+
+        var errors = req.validationErrors();
+
+        if (errors)
+            res.render('submit', {
+                errors: errors
+            });
+        max = max + 1;
+
+
+        req.getConnection(function (err, connection) {
+
+
+            var query = connection.query(
+                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude) VALUES (" + max + ",'" + title + "','"
+                + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
+                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "')", function (err, rows) {
+                    if (err)
+                        console.log("Error Inserting : %s ", err);
+                    res.redirect('/');
+                });
+
+        });
+    }
 });
+
+
+function ensureAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    } else {
+        //req.flash('loginMessage','You are not logged in');
+        res.redirect('/user/login');
+    }
+}
+
 
 module.exports = router;
