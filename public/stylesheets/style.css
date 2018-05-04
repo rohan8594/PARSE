@@ -39,9 +39,20 @@ h3 {
   font-family: sans-serif;
 }
 
-/* Navbar code */
+
+/* Code for the general layout */
 body {
-  background-image: url(images/design_images/sanfranfrontpage.jpg) no-repeat;
+  background-image: url(images/design_images/sanfranfrontpage.jpg);
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.6);
+  height: 100%;
 }
 
 /* Results display code */
@@ -65,6 +76,19 @@ h1{
   /*border-style: solid;*/
   border-radius: 20px;
 }
+
+/* Dashboard page */
+#dashboard-filter {
+  background-color: yellow; /* Placeholder color so that we know where it is. */
+  min-height: 500px;
+}
+
+#dashboard-issues-list {
+  background-color: blue; /* Placeholder color so that we know where it is. */
+  min-height: 500px;
+}
+
+
 /* Search Result CSS */
 
 .home-search-result {
