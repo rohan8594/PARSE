@@ -33,7 +33,7 @@ router.get('/', function (req, res) {
     var pool = mysql.createPool(creds);
     var query1 = 'SELECT name FROM category';
     var query2 = 'SELECT issue.id, issue.title, category.name, issue.thumbnail, ' +
-        'issue.description, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id;';
+        'issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id;';
 
     var return_data = {};
 
@@ -122,6 +122,7 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
     var desc = req.body.description;
     var zipcode = req.body.zipcode;
     var category = req.body.issue_category;
+    var address = req.body.address;
     var latitude = req.body.Lat;
     var longitude = req.body.Lng;
     var filename = req.file.filename;
@@ -165,9 +166,9 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
 
 
             var query = connection.query(
-                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude) VALUES (" + max + ",'" + title + "','"
+                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address) VALUES (" + max + ",'" + title + "','"
                 + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
-                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "');"
+                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "','" + address + "');"
                 + "INSERT INTO user set ?", data,
                 function (err, rows) {
                     if (err)
@@ -192,9 +193,9 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
 
 
             var query = connection.query(
-                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude) VALUES (" + max + ",'" + title + "','"
+                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address) VALUES (" + max + ",'" + title + "','"
                 + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
-                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "')", function (err, rows) {
+                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "','" + address + "')", function (err, rows) {
                     if (err)
                         console.log("Error Inserting : %s ", err);
                     res.redirect('/');
