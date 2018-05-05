@@ -1,4 +1,4 @@
-<! -- login.ejs -->
+<!-- login.ejs -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,18 +7,16 @@
 	<meta name="viewport" content="width = device-width, initial-scale = 1">
 
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-<link rel='stylesheet' href='/stylesheets/login.css'/>
+	<% include templates/stylesheet-refs.ejs %>
     <% include templates/google-analytics.ejs %>
 </head>
 
 <body>
-<!--  BEGIN NAVIGATION BAR -->
-<% include templates/navigation.ejs %>
-<!-- END OF NAVIGATION BAR -->
+	<!--  BEGIN NAVIGATION BAR -->
+	<% include templates/navigation.ejs %>
+	<!-- END OF NAVIGATION BAR -->
 
-	<div class="container-fluid bg">
+	<div class="container">
 	  <div class="row">
           <% if (message.length > 0) { %>
           <div class="alert alert-danger"><%= message %></div>
@@ -46,5 +44,8 @@
 	  <div class="col-md-4 col-sm-4 col-xs-12"></div>
 	  </div>
 	</div>
+
+
+	<% include templates/javascript-refs.ejs %>
 </body>
 </html>
