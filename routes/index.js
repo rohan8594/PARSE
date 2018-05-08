@@ -29,6 +29,10 @@ var creds = {
 
 /* GET home page. */
 router.get('/', function (req, res) {
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+    }
 
     var pool = mysql.createPool(creds);
     var query1 = 'SELECT name FROM category';
@@ -70,12 +74,15 @@ router.get('/', function (req, res) {
     ], function (err) {
         if (err) console.log(err);
         //pool.end();
-        res.render('index', {title: "Team 04", category: return_data.table1, data: return_data.table2});
+        res.render('index', {title: "Team 04", category: return_data.table1, data: return_data.table2, isLogged: isLoggedIn});
     });
 });
 
 router.get('/issue/view/:id', function (req, res, next) {
-
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+    }
     var id = req.params.id;
 
     req.getConnection(function (err, connection) {
@@ -85,7 +92,7 @@ router.get('/issue/view/:id', function (req, res, next) {
             if (err)
                 console.log("Error Selecting : %s ", err);
 
-            res.render('display_issue', {page_title: "View Result", data: rows});
+            res.render('display_issue', {page_title: "View Result", data: rows, isLogged:isLoggedIn});
 
 
         });
@@ -204,16 +211,6 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
         });
     }
 });
-
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    } else {
-        //req.flash('loginMessage','You are not logged in');
-        res.redirect('/user/login');
-    }
-}
 
 
 module.exports = router;

@@ -3,6 +3,10 @@ var router = express.Router();
 
 /* GET search_results page. */
 router.get('/', function (req, res, next) {
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+    }
 
     var zip_code = req.query.zip_code;
     var issue_category = req.query.issue_category;
@@ -16,7 +20,7 @@ router.get('/', function (req, res, next) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1]});
+            res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1], isLogged: isLoggedIn});
             //console.log(rows)
         });
     });
