@@ -10,7 +10,13 @@ router.get('/my_account', function(req, res){
     if (req.isAuthenticated()){
         isLoggedIn = true;
     }
-   res.render('my_account', { message: req.flash('loginMessage'), isLogged: isLoggedIn});
+    var isAnAdmin = false;
+    if (req.user.isAdmin === 1)
+    {
+        isAnAdmin = true;
+    }
+
+   res.render('my_account', { message: req.flash('loginMessage'), isLogged: isLoggedIn, isAdmin: isAnAdmin});
 });
 
 
