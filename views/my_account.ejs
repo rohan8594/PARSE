@@ -33,6 +33,29 @@
             <!-- The filter side of the dashboard page -->
             <div class="col-md-4" id="dashboard-filter">
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Filter by:</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 filter-button" id="pending-filter-button">
+                        <h2 class="filter-title">Pending</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 filter-button" id="approved-filter-button">
+                        <h2 class="filter-title">Approved</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 filter-button" id="completed-filter-button">
+                        <h2 class="filter-title">Completed</h2>
+                    </div>
+                </div>
 
 
             </div>
@@ -41,7 +64,9 @@
             <!-- The list of issues to update -->
             <div class="col-md-8" id="dashboard-issues-list">
 
-                
+                <% include templates/account_pending_issues.ejs %>
+                <% include templates/account_approved_issues.ejs %>
+                <% include templates/account_completed_issues.ejs %>
 
             </div>
 
@@ -50,23 +75,37 @@
 
     </div>
 
-    <footer class="text-muted">
-        <div class="container">
-            <!-- Default Bootstrap Footer
-          <p class="float-right">
-            <a href="#">Back to top</a>
-          </p>
-          <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-          <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-      -->
-        </div>
-    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- Script references -->
     <% include templates/javascript-refs.ejs %>
+
+    <script type="text/javascript">
+
+        $("#pending-issues").show();
+        $("#completed-issues").hide();
+        $("#approved-issues").hide();
+
+        $("#pending-filter-button").click(function() {
+            $("#pending-issues").show();
+            $("#completed-issues").hide();
+            $("#approved-issues").hide();
+        });
+
+        $("#approved-filter-button").click(function() {
+            $("#pending-issues").hide();
+            $("#completed-issues").hide();
+            $("#approved-issues").show();
+        });
+
+        $("#completed-filter-button").click(function() {
+            $("#pending-issues").hide();
+            $("#completed-issues").show();
+            $("#approved-issues").hide();
+        });
+    </script>
 
 </body>
 </html>
