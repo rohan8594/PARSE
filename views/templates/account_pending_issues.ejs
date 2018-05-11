@@ -10,15 +10,33 @@
 
 	</div>
 
-	<div class="row">
+	<div class="row issue-listing">
+				
+		<form method="POST" enctype="multipart/form-data" action="">
 
-		<div class="col-md-12">
+			<div class="col-md-3 form-element bordered">
+				Issue description
+			</div>
 
-			<p>
-				Pending issues be displayed in a loop here.
-			</p>
+			<div class="col-md-3 form-element bordered">
+				Issue location
+			</div>
 
-		</div>
+			<div class="col-md-3 form-element bordered">
+				<select name="issue_status">
+					<option></option>
+					<option>Pending</option>
+					<option>Approved</option>
+					<option>Completed</option>
+				</select>
+			</div>
+
+			<div class="col-md-2 form-element bordered">
+				<button type="submit">save changes</button>
+			</div>
+
+
+		</form>
 
 	</div>
 </div>
