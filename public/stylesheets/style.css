@@ -78,14 +78,46 @@ h1{
 }
 
 /* Dashboard page */
+.bordered {
+   border-style: solid; /* This is purely for testing purposes so that we know where the divs are. */
+}
+
 #dashboard-filter {
-  background-color: yellow; /* Placeholder color so that we know where it is. */
   min-height: 500px;
 }
 
+#dashboard-filter h1 {
+  text-align: center;
+}
+
 #dashboard-issues-list {
-  background-color: blue; /* Placeholder color so that we know where it is. */
   min-height: 500px;
+}
+
+.filter-button {
+  background-color: blue;
+  border-radius: 5%;
+  box-shadow: 1px 1px 1px #484f5b;
+  text-align: center;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.filter-button:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+
+.filter-title {
+  color: yellow;
+}
+
+.issues-title {
+  text-align: center;
+}
+
+.issues-container {
+  min-width: 100%;
 }
 
 
