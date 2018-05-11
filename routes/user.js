@@ -7,13 +7,14 @@ var passport = require('passport');
 
 router.get('/my_account', function(req, res){
     var isLoggedIn = false;
+    var isAnAdmin = false;
+
     if (req.isAuthenticated()){
         isLoggedIn = true;
-    }
-    var isAnAdmin = false;
-    if (req.user.isAdmin === 1)
-    {
-        isAnAdmin = true;
+        if (req.user.isAdmin === 1)
+        {
+            isAnAdmin = true;
+        }
     }
 
    res.render('my_account', { message: req.flash('loginMessage'), isLogged: isLoggedIn, isAdmin: isAnAdmin});
