@@ -77,7 +77,7 @@ h1{
   border-radius: 20px;
 }
 
-/* Dashboard page */
+/* --------------------------- DASHBOARD PAGE ------------------------------ */
 .bordered {
    border-style: solid; /* This is purely for testing purposes so that we know where the divs are. */
 }
@@ -114,6 +114,15 @@ h1{
 
 .issues-title {
   text-align: center;
+}
+
+.issue-listing form{
+  display:block;
+}
+
+.form-element {
+  display: inline-block;
+  margin:0;
 }
 
 .issues-container {
