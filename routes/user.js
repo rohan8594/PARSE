@@ -42,12 +42,13 @@ router.post('/signup', function(req, res){
     var password = req.body.password;
     var password2 = req.body.password2;
 
-    console.log(req.body.username)
-    console.log(req.body.Name)
-    console.log(req.body.password)
 
-    req.checkBody('username', 'Username is required').notEmpty();
-    req.checkBody('password', 'Password is required').notEmpty();
+    // Field validation
+    req.checkBody('Name', 'Name field cannot be empty').notEmpty();
+    req.checkBody('username', 'Username cannot be empty').notEmpty();
+    req.checkBody('password', 'Password cannot be empty').notEmpty();
+    req.checkBody('password', 'Password must be at least 8 characters long').len(8, 100);
+    req.checkBody('password2', 'Password must be at least 8 characters long').len(8, 100);
     req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
     var errors = req.validationErrors();
