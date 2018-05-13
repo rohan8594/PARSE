@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
 
         var query = connection.query("SELECT issue.id, issue.title, category.name, issue.thumbnail, " +
             "issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id " +
-            "WHERE category.name LIKE '%" + issue_category + "%' AND zipcode LIKE '%" + zip_code + "%'; SELECT name FROM category", [1,2], function(err,rows) {
+            "WHERE issue.status != 1 AND category.name LIKE '%" + issue_category + "%' AND zipcode LIKE '%" + zip_code + "%'; SELECT name FROM category", [1,2], function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 

@@ -33,7 +33,8 @@ router.get('/', function (req, res) {
     var pool = mysql.createPool(creds);
     var query1 = 'SELECT name FROM category';
     var query2 = 'SELECT issue.id, issue.title, category.name, issue.thumbnail, ' +
-        'issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id;';
+        'issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id ' +
+        'WHERE issue.status != 1;';
 
     var return_data = {};
 
@@ -166,9 +167,9 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
 
 
             var query = connection.query(
-                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address) VALUES (" + max + ",'" + title + "','"
+                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status) VALUES (" + max + ",'" + title + "','"
                 + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
-                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "','" + address + "');"
+                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "','" + address + "'," + 1 + ");"
                 + "INSERT INTO user set ?", data,
                 function (err, rows) {
                     if (err)
@@ -193,9 +194,9 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
 
 
             var query = connection.query(
-                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address) VALUES (" + max + ",'" + title + "','"
+                "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status) VALUES (" + max + ",'" + title + "','"
                 + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'/images/issue_images/"
-                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "','" + address + "')", function (err, rows) {
+                + filename + "','/images/thumbnails/" + thumnail_fname + "','" + latitude + "','" + longitude + "','" + address + "'," + 1 + ")", function (err, rows) {
                     if (err)
                         console.log("Error Inserting : %s ", err);
                     res.redirect('/');
