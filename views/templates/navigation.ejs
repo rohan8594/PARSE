@@ -1,37 +1,26 @@
-<!-- Micheal Schwiebert -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">PARSE</a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="/submit">Submit an Issue</a>
-      <a class="nav-item nav-link" href="/user/my_account">Dashboard</a>
-      <a class="nav-item nav-link" href="/about">About</a>
-
-
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/login" class="">login</a></li>
-        <li>
-          <div class="btn-nav">
-            <a class="btn btn-primary btn-small navbar-btn" href="/register">Sign up!</a>
-          </div>
-        </li>
-      </ul>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand active" href="/">PARSE</a>
     </div>
+    <ul class="nav navbar-nav">
+      <li class=""><a href="/submit">Submit an Issue</a></li>
+      <li class=""><a href="/user/my_account">Dashboard</a></li>
+      <li><a href="/about">About Us</a></li>
+    </ul>
+    <div class="col-sm-3 col-md-3">
+      <form class="navbar-form" role="search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Enter Zipdcode:">
+          <div class="input-group-btn">
+            <button type="btn btn-default" type="submit">SUBMIT</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/user/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
   </div>
 </nav>
-
-
-<!-- Integrated Search bar -->
-<!-- <div class="search-container">
-<form action="/search_results" method="get" class="text-center">
-<div class="row">
-<div class="col">
-<input id="title" type="text" name="zip_code" placeholder="enter zipcode">
-</div>
-</form>
-</div>
-</div> -->
