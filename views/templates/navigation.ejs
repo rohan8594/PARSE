@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/">PARSE</a>
 
@@ -6,21 +7,31 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/submit">Submit an Issue</a>
+      <a class="nav-item nav-link" href="/user/my_account">Dashboard</a>
+      <a class="nav-item nav-link" href="/about">About</a>
 
-        <a class="nav-item nav-link" href="/user/login">Login</a>
-        <a class="nav-item nav-link" href="/user/register">Sign up</a>
-        <a class="nav-item nav-link" href="/submit">Submit an Issue</a>
-        <a class="nav-item nav-link" href="/user/my_account">Dashboard</a>
-        <a class="nav-item nav-link" href="/about">About</a>
-        <div class="search-container">
-          <form action="/search_results" method="get" class="text-center">
-            <div class="row">
-              <div class="col">
-                <input id="title" type="text" name="zip_code" placeholder="enter zipcode">
-            </div>
-          </form>
-        </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/login" class="">login</a></li>
+        <li>
+          <div class="btn-nav">
+            <a class="btn btn-primary btn-small navbar-btn" href="/register">Sign up!</a>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
 
+
+<!-- Integrated Search bar -->
+<!-- <div class="search-container">
+<form action="/search_results" method="get" class="text-center">
+<div class="row">
+<div class="col">
+<input id="title" type="text" name="zip_code" placeholder="enter zipcode">
+</div>
+</form>
+</div>
+</div> -->
