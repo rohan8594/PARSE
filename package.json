@@ -21,6 +21,7 @@
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "~1.18.2",
+    "cloudinary": "^1.11.0",
     "connect": "^3.6.6",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
