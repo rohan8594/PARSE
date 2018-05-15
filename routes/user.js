@@ -6,12 +6,29 @@ var bcrypt = require('bcrypt-nodejs');
 var passport = require('passport');
 
 router.get('/my_account', function(req, res){
-   res.render('my_account', { message: req.flash('loginMessage') });
+    var isLoggedIn = false;
+    var isAnAdmin = false;
+
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+        if (req.user.isAdmin === 1)
+        {
+            isAnAdmin = true;
+        }
+    }
+
+   res.render('my_account', { message: req.flash('loginMessage'), isLogged: isLoggedIn, isAdmin: isAnAdmin});
 });
 
 
 router.get('/login', function(req, res) {
-    res.render('login', { message: req.flash('loginMessage') });
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+        res.redirect('/my_account');
+    } else {
+        res.render('login', {message: req.flash('loginMessage'), isLogged:isLoggedIn});
+    }
 });
 
 router.post('/login', passport.authenticate('local-login', {
@@ -28,11 +45,19 @@ router.post('/login', passport.authenticate('local-login', {
         res.redirect('/');
     });
 
-
+router.get('/logout', function(req, res){
+    req.logout();
+    res.render('login', {message: req.flash('You have been logged out.')});
+});
 
 router.get('/register', function (req, res, next) {
-    res.render('register');
-});
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+        res.redirect('/my_account');
+    } else {
+        res.render('register', {message: req.flash('loginMessage'), isLogged:isLoggedIn});
+    }});
 
 
 
@@ -42,12 +67,12 @@ router.post('/signup', function(req, res){
     var password = req.body.password;
     var password2 = req.body.password2;
 
-    console.log(req.body.username)
-    console.log(req.body.Name)
-    console.log(req.body.password)
-
-    req.checkBody('username', 'Username is required').notEmpty();
-    req.checkBody('password', 'Password is required').notEmpty();
+    // Field validation
+    req.checkBody('Name', 'Name field cannot be empty').notEmpty();
+    req.checkBody('username', 'Username cannot be empty').notEmpty();
+    req.checkBody('password', 'Password cannot be empty').notEmpty();
+    req.checkBody('password', 'Password must be at least 8 characters long').len(8, 100);
+    req.checkBody('password2', 'Password must be at least 8 characters long').len(8, 100);
     req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
     var errors = req.validationErrors();
