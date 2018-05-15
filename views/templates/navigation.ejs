@@ -1,24 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .search-container {
+            float: right;
+        }
+        .search-container input[type=text] {
+            padding: 4px;
+            margin-top: 0px;
+            font-size: 17px;
+            border: none;
+        }
+        .search-container button {
+            float: right;
+            padding: 4px 10px;
+            margin-top: 0px;
+            margin-right: 4px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+        .search-container button:hover {
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">PARSE</a>
+    <a class="navbar-brand" href="/">PARSE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+            <% if(!locals.isLogged) { %>
+            <a class="nav-item nav-link" href="/user/login">Login</a>
+            <a class="nav-item nav-link" href="/user/register">Sign up</a>
+            <% } else { %>
+            <a class="nav-item nav-link" href="/user/my_account">Dashboard</a>
+            <a class="nav-item nav-link" href="/user/logout">Logout</a>
+            <% } %>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-
-        <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-        <% if(!locals.isLogged) { %>
-        <a class="nav-item nav-link" href="/user/login">Login</a>
-        <a class="nav-item nav-link" href="/user/register">Sign up</a>
-        <% } else { %>
-        <a class="nav-item nav-link" href="/user/my_account">Dashboard</a>
-        <a class="nav-item nav-link" href="/user/logout">Logout</a>
-        <% } %>
-
-        <a class="nav-item nav-link" href="/submit">Submit an Issue</a>
-        <a class="nav-item nav-link" href="/about">About</a>
-
+            <a class="nav-item nav-link" href="/submit">Submit an Issue</a>
+            <a class="nav-item nav-link" href="/about">About</a>
+        </div>
     </div>
-  </div>
+    <div class="search-container">
+        <form action="/search_results" method="get">
+            <input type="text" placeholder="Zipcode.." name="zip_code">
+            <input type="hidden" name="issue_category" value=""/>
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
 </nav>
+</body>
+</html>
