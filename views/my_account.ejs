@@ -64,9 +64,9 @@
             <!-- The list of issues to update -->
             <div class="col-md-8" id="dashboard-issues-list">
 
-                <% include templates/account_pending_issues.ejs %>
-                <% include templates/account_approved_issues.ejs %>
-                <% include templates/account_completed_issues.ejs %>
+                    <% include templates/account_pending_issues.ejs %>
+                    <% include templates/account_approved_issues.ejs %>
+                    <% include templates/account_completed_issues.ejs %>
 
             </div>
 
@@ -84,26 +84,59 @@
 
     <script type="text/javascript">
 
-        $("#pending-issues").show();
-        $("#completed-issues").hide();
-        $("#approved-issues").hide();
+        $(function() {
 
-        $("#pending-filter-button").click(function() {
+            // Filter code ---------------------------------------
             $("#pending-issues").show();
             $("#completed-issues").hide();
             $("#approved-issues").hide();
-        });
 
-        $("#approved-filter-button").click(function() {
-            $("#pending-issues").hide();
-            $("#completed-issues").hide();
-            $("#approved-issues").show();
-        });
+            $("#pending-filter-button").click(function() {
+                $("#pending-issues").show();
+                $("#completed-issues").hide();
+                $("#approved-issues").hide();
+            });
 
-        $("#completed-filter-button").click(function() {
-            $("#pending-issues").hide();
-            $("#completed-issues").show();
-            $("#approved-issues").hide();
+            $("#approved-filter-button").click(function() {
+                $("#pending-issues").hide();
+                $("#completed-issues").hide();
+                $("#approved-issues").show();
+            });
+
+            $("#completed-filter-button").click(function() {
+                $("#pending-issues").hide();
+                $("#completed-issues").show();
+                $("#approved-issues").hide();
+            });
+
+            // Submit code --------------------------------------------
+
+            // Submit Listener for the "form"
+            // This event will update the database with the new issue status.
+            $(".issue-list-item").on("submit", function(e) {
+                e.preventDefault(); // Prevent the page from refreshing
+
+                // Ajax request will go here to update the database
+
+
+
+
+                // Update the update-flag
+                var updateFlag = $(this).parent().parent().find(".update-flag");
+                updateFlag.text("updated");
+
+                // Show the data so that we know it's working
+                var alertMsg = "DEBUG MESSAGE\nSubmitted the following info:\n";
+                alert(alertMsg + $(this).serialize());
+
+            });
+
+            // Change listener for the dropdown menu
+            // It causes the form to submit
+            $(".category-dropdown").on("change", function(e) {
+                $(this).parent().parent().submit(); // The parent form
+            });
+
         });
     </script>
 
