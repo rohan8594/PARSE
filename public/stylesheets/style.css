@@ -116,8 +116,11 @@ h1{
   text-align: center;
 }
 
-.issue-listing form{
-  display:block;
+.issue-listing{
+  background-color: yellow;
+  margin-top: 10px;
+  padding: 20px;
+
 }
 
 .form-element {
@@ -127,6 +130,10 @@ h1{
 
 .issues-container {
   min-width: 100%;
+}
+
+.hidden {
+  display: none;
 }
 
 
