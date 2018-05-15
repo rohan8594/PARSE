@@ -29,46 +29,20 @@ cloudinary.config({
 
 var max = null;
 
-var creds = {
-
-    host: "us-cdbr-iron-east-05.cleardb.net",
-    user: "b3220b75dccc0a",
-    password: "ddd8323b",
-    database: "heroku_d6fcf8fd2312a32"
-
-};
-
 /* GET home page. */
 router.get('/', function (req, res) {
 
-    var pool = mysql.createPool(creds);
-    var query1 = 'SELECT name FROM category';
-    var query2 = 'SELECT issue.id, issue.title, category.name, issue.thumbnail, ' +
-        'issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id ' +
-        'WHERE issue.status != 1;';
+    req.getConnection(function(err, connection) {
 
-    var return_data = {};
+        var query = connection.query("SELECT issue.id, issue.title, category.name, issue.thumbnail, " +
+        "issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id " +
+        "WHERE issue.status != 1; SELECT name FROM category", [1,2], function(err,rows) {
+            if(err)
+                console.log("Error Selecting : %s ",err );
 
-    async.parallel([
-        function (parallel_done) {
-            pool.query(query1, {}, function (err, results) {
-                if (err) return parallel_done(err);
-                return_data.table1 = results;
-                parallel_done();
-            });
-        },
-        function (parallel_done) {
-            pool.query(query2, {}, function (err, results) {
-                if (err) return parallel_done(err);
-                return_data.table2 = results;
-                //console.log(results);
-                parallel_done();
-            });
-        }
-    ], function (err) {
-        if (err) console.log(err);
-        //pool.end();
-        res.render('index', {title: "Team 04", category: return_data.table1, data: return_data.table2});
+            res.render('index', {title: 'Team 04', data: rows[0], category:rows[1]});
+            //console.log(rows)
+        });
     });
 });
 
