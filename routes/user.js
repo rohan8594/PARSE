@@ -6,12 +6,29 @@ var bcrypt = require('bcrypt-nodejs');
 var passport = require('passport');
 
 router.get('/my_account', function(req, res){
-   res.render('my_account', { message: req.flash('loginMessage') });
+    var isLoggedIn = false;
+    var isAnAdmin = false;
+
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+        if (req.user.isAdmin === 1)
+        {
+            isAnAdmin = true;
+        }
+    }
+
+   res.render('my_account', { message: req.flash('loginMessage'), isLogged: isLoggedIn, isAdmin: isAnAdmin});
 });
 
 
 router.get('/login', function(req, res) {
-    res.render('login', { message: req.flash('loginMessage') });
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+        res.redirect('/my_account');
+    } else {
+        res.render('login', {message: req.flash('loginMessage'), isLogged:isLoggedIn});
+    }
 });
 
 router.post('/login', passport.authenticate('local-login', {
@@ -28,11 +45,19 @@ router.post('/login', passport.authenticate('local-login', {
         res.redirect('/');
     });
 
-
+router.get('/logout', function(req, res){
+    req.logout();
+    res.render('login', {message: req.flash('You have been logged out.')});
+});
 
 router.get('/register', function (req, res, next) {
-    res.render('register');
-});
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+        res.redirect('/my_account');
+    } else {
+        res.render('register', {message: req.flash('loginMessage'), isLogged:isLoggedIn});
+    }});
 
 
 
@@ -41,7 +66,6 @@ router.post('/signup', function(req, res){
     var name = req.body.Name;
     var password = req.body.password;
     var password2 = req.body.password2;
-
 
     // Field validation
     req.checkBody('Name', 'Name field cannot be empty').notEmpty();

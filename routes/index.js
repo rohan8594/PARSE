@@ -31,6 +31,10 @@ var max = null;
 
 /* GET home page. */
 router.get('/', function (req, res) {
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+    }
 
     req.getConnection(function(err, connection) {
 
@@ -47,7 +51,10 @@ router.get('/', function (req, res) {
 });
 
 router.get('/issue/view/:id', function (req, res, next) {
-
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+    }
     var id = req.params.id;
 
     req.getConnection(function (err, connection) {
@@ -57,7 +64,7 @@ router.get('/issue/view/:id', function (req, res, next) {
             if (err)
                 console.log("Error Selecting : %s ", err);
 
-            res.render('display_issue', {page_title: "View Result", data: rows});
+            res.render('display_issue', {page_title: "View Result", data: rows, isLogged:isLoggedIn});
 
 
         });
@@ -174,14 +181,5 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
         }
     });
 });
-
-function ensureAuthenticated(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    } else {
-        //req.flash('loginMessage','You are not logged in');
-        res.redirect('/user/login');
-    }
-}
 
 module.exports = router;
