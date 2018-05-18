@@ -123,8 +123,19 @@
 
                 // Ajax request will go here to update the database
 
-
-
+                var data = {};
+                data.title = "title";
+                data.message = "message";
+                $.ajax({
+                    type: 'POST',
+                    data: data,
+                    dataType: 'application/json',
+                    url: '/user/update_status',
+                    success: function(data) {
+                        console.log('success');
+                        console.log(JSON.stringify(data));
+                    }
+                });
 
                 // Update the update-flag
                 var updateFlag = $(this).parent().parent().find(".update-flag");

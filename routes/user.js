@@ -17,15 +17,39 @@ router.get('/my_account', function(req, res){
         }
     }
 
-   res.render('my_account', { message: req.flash('loginMessage'), isLogged: isLoggedIn, isAdmin: isAnAdmin});
+    req.getConnection(function(err, connection) {
+
+        var query = connection.query("SELECT issue.id, issue.title, category.name, issue.thumbnail, " +
+            "issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id " +
+            "WHERE issue.status != 1; SELECT name FROM category", [1,2], function(err,rows) {
+            if(err)
+                console.log("Error Selecting : %s ",err );
+
+            res.render('my_account', {message: req.flash('loginMessage'), title: 'Team 04', data: rows[0], category:rows[1], isLogged:isLoggedIn, isAdmin: isAnAdmin});
+            //console.log(rows)
+        });
+    });
 });
 
+//TODO: Change this so it will update the proper issue and not just the first
+router.post('/update_status', function(req, res){
+    console.log('body: ' + JSON.stringify(req.body));
+
+    req.getConnection(function(err, connection){
+       var query = connection.query("UPDATE issue SET status='3' WHERE id='1';\n", function(err){
+           if(err) console.log("Error Updating : %s ",err );
+           res.send(req.body);
+
+       });
+
+    });
+});
 
 router.get('/login', function(req, res) {
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
-        res.redirect('/my_account');
+        res.redirect('/user/my_account');
     } else {
         res.render('login', {message: req.flash('loginMessage'), isLogged:isLoggedIn});
     }
