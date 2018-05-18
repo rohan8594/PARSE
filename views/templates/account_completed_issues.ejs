@@ -10,102 +10,52 @@
 	</div>
 
 
-<!-- --------------- This is a dummy listing for testing purposes. ---------------------
-	Eventually this will be generated automatically using EJS tags -->
-	<div class="row issue-listing">
-		<div class="col-md-3">
-			COMPLETED ISSUE 1 INFO
-		</div>
+  <% if(data.length){
 
-		<div class="col-md-3">
-			COMPLETED ISSUE 1 INFO
-		</div>
-				
-		<div class="col-md-3" >
-			<form class="issue-list-item" id="testid">
-				<input class="form-control hidden" type="hidden" value="12345" name="field1" />
-				<input class="form-control hidden" type="hidden" value="Trash" name="field2" />
+  for(var i = 0;i < data.length;i++) {
 
-				<div class="select">
-					<select name="issue_status" class="category-dropdown">
-						<option>Completed</option>
-						<option>Pending</option>
-						<option>Approved</option>
-					</select>
-				</div>
-			</form>
-		</div>
+  	 if(data[i].status=='1') { %>
 
-		<div class="col-md-3">
-			<span class="update-flag"></span>
-		</div>
+	  	<div class="row issue-listing">
+	  		<div class="col-md-3">
+	  			<%= data[i].title %>
+	  		</div>
 
-	</div>
+	  		<div class="col-md-3">
+	  			<%= data[i].description %>
+	  		</div>
+	  				
+	  		<div class="col-md-3" >
+	  			<form class="issue-list-item" id="testid">
+	  				<input class="form-control hidden" type="hidden" value=<%=data[i].id%> name="id" />
 
+	  				<div class="select">
+	  					<select name="status" class="category-dropdown">
+	  						<option value="1" selected>Completed</option>
+	  						<option value="2">Pending</option>
+	  						<option value="3">Approved</option>
+	  					</select>
+	  				</div>
+	  			</form>
+	  		</div>
 
-<!-- --------------- Another dummy listing. Again, this is just a test ------------- -->
-	<div class="row issue-listing">
-		<div class="col-md-3">
-			COMPLETED ISSUE 2 INFO
-		</div>
+	  		<div class="col-md-3">
+	  			<span class="update-flag"></span>
+	  		</div>
 
-		<div class="col-md-3">
-			COMPLETED ISSUE 2 INFO
-		</div>
-				
-		<div class="col-md-3" >
-			<form class="issue-list-item" id="testid">
-				<input class="form-control hidden" type="hidden" value="56879" name="field1" />
-				<input class="form-control hidden" type="hidden" value="Pollution" name="field2" />
+	  	</div>
 
-				<div class="select">
-					<select name="issue_status" class="category-dropdown">
-						<option>Completed</option>
-						<option>Pending</option>
-						<option>Approved</option>
-					</select>
-				</div>
-			</form>
-		</div>
+  	<% } 
 
-		<div class="col-md-3">
-			<span class="update-flag"></span>
-		</div>
+     }
 
-	</div>
+  }else{ %>
 
 
-	<!-- ---------------------- Third dummy listing.----------------------------- -->
-		<div class="row issue-listing">
+  No completed issues.
 
-			<div class="col-md-3">
-				COMPLETED ISSUE 3 INFO
-			</div>
 
-			<div class="col-md-3">
-				COMPLETED ISSUE 3 INFO
-			</div>
-					
-			<div class="col-md-3" >
-				<form class="issue-list-item" id="testid">
-					<input class="form-control hidden" type="hidden" value="47575" name="zipcode" />
-					<input class="form-control hidden" type="hidden" value="Raccoons" name="issue" />
-
-					<div class="select">
-						<select name="issue_status" class="category-dropdown">
-						<option>Completed</option>
-						<option>Pending</option>
-						<option>Approved</option>
-						</select>
-					</div>
-				</form>
-			</div>
-
-			<div class="col-md-3">
-				<span class="update-flag"></span>
-			</div>
-
-		</div>
+  <% } %>
 
 
 
