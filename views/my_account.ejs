@@ -122,8 +122,7 @@
                 e.preventDefault(); // Prevent the page from refreshing
 
                 // Ajax request will go here to update the database
-
-                var data = {};
+                var data = $(this).serialize();
                 data.title = "title";
                 data.message = "message";
                 $.ajax({

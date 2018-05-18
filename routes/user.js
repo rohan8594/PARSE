@@ -19,7 +19,7 @@ router.get('/my_account', function(req, res){
 
     req.getConnection(function(err, connection) {
 
-        var query = connection.query("SELECT issue.id, issue.title, category.name, issue.thumbnail, " +
+        var query = connection.query("SELECT issue.id, issue.status, issue.title, category.name, issue.thumbnail, " +
             "issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id " +
             "WHERE issue.status != 1; SELECT name FROM category", [1,2], function(err,rows) {
             if(err)
