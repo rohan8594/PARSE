@@ -38,6 +38,29 @@
             <!-- The filter side of the dashboard page -->
             <div class="col-md-4" id="dashboard-filter">
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Filter by:</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 filter-button" id="pending-filter-button">
+                        <h2 class="filter-title">Pending</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 filter-button" id="approved-filter-button">
+                        <h2 class="filter-title">Approved</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 filter-button" id="completed-filter-button">
+                        <h2 class="filter-title">Completed</h2>
+                    </div>
+                </div>
 
 
             </div>
@@ -46,7 +69,9 @@
             <!-- The list of issues to update -->
             <div class="col-md-8" id="dashboard-issues-list">
 
-                
+                    <% include templates/account_pending_issues.ejs %>
+                    <% include templates/account_approved_issues.ejs %>
+                    <% include templates/account_completed_issues.ejs %>
 
             </div>
 
@@ -55,23 +80,80 @@
 
     </div>
 
-    <footer class="text-muted">
-        <div class="container">
-            <!-- Default Bootstrap Footer
-          <p class="float-right">
-            <a href="#">Back to top</a>
-          </p>
-          <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-          <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-      -->
-        </div>
-    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- Script references -->
     <% include templates/javascript-refs.ejs %>
+
+    <script type="text/javascript">
+
+        $(function() {
+
+            // Filter code ---------------------------------------
+            $("#pending-issues").show();
+            $("#completed-issues").hide();
+            $("#approved-issues").hide();
+
+            $("#pending-filter-button").click(function() {
+                $("#pending-issues").show();
+                $("#completed-issues").hide();
+                $("#approved-issues").hide();
+            });
+
+            $("#approved-filter-button").click(function() {
+                $("#pending-issues").hide();
+                $("#completed-issues").hide();
+                $("#approved-issues").show();
+            });
+
+            $("#completed-filter-button").click(function() {
+                $("#pending-issues").hide();
+                $("#completed-issues").show();
+                $("#approved-issues").hide();
+            });
+
+            // Submit code --------------------------------------------
+
+            // Submit Listener for the "form"
+            // This event will update the database with the new issue status.
+            $(".issue-list-item").on("submit", function(e) {
+                e.preventDefault(); // Prevent the page from refreshing
+
+                // Ajax request will go here to update the database
+                var data = $(this).serialize();
+                data.title = "title";
+                data.message = "message";
+                $.ajax({
+                    type: 'POST',
+                    data: data,
+                    dataType: 'application/json',
+                    url: '/user/update_status',
+                    success: function(data) {
+                        console.log('success');
+                        console.log(JSON.stringify(data));
+                    }
+                });
+
+                // Update the update-flag
+                var updateFlag = $(this).parent().parent().find(".update-flag");
+                updateFlag.text("updated");
+
+                // Show the data so that we know it's working
+                var alertMsg = "DEBUG MESSAGE\nSubmitted the following info:\n";
+                alert(alertMsg + $(this).serialize());
+
+            });
+
+            // Change listener for the dropdown menu
+            // It causes the form to submit
+            $(".category-dropdown").on("change", function(e) {
+                $(this).parent().parent().submit(); // The parent form
+            });
+
+        });
+    </script>
 
 </body>
 </html>

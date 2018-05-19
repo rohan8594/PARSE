@@ -1,0 +1,63 @@
+<div class="issues-container" id="completed-issues">
+	<div class="row">
+
+		<div class="col-md-12">
+
+			<h1 class="issues-title">Completed Issues</h1>
+
+		</div>
+
+	</div>
+
+
+  <% if(data.length){
+
+  for(var i = 0;i < data.length;i++) {
+
+  	 if(data[i].status=='1') { %>
+
+	  	<div class="row issue-listing">
+	  		<div class="col-md-3">
+	  			<%= data[i].title %>
+	  		</div>
+
+	  		<div class="col-md-3">
+	  			<%= data[i].description %>
+	  		</div>
+	  				
+	  		<div class="col-md-3" >
+	  			<form class="issue-list-item" id="testid">
+	  				<input class="form-control hidden" type="hidden" value=<%=data[i].id%> name="id" />
+
+	  				<div class="select">
+	  					<select name="status" class="category-dropdown">
+	  						<option value="1" selected>Completed</option>
+	  						<option value="2">Pending</option>
+	  						<option value="3">Approved</option>
+	  					</select>
+	  				</div>
+	  			</form>
+	  		</div>
+
+	  		<div class="col-md-3">
+	  			<span class="update-flag"></span>
+	  		</div>
+
+	  	</div>
+
+  	<% } 
+
+     }
+
+  }else{ %>
+
+
+  No completed issues.
+
+
+  <% } %>
+
+
+
+	
+</div>

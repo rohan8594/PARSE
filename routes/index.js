@@ -44,10 +44,20 @@ router.get('/', function (req, res) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('index', {title: 'Team 04', data: rows[0], category:rows[1]});
+            res.render('index', {title: 'Team 04', data: rows[0], category:rows[1], isLogged:isLoggedIn});
             //console.log(rows)
         });
     });
+});
+
+
+router.get('/about', function (req, res){
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+    }
+    res.render('about', {title: 'Team 04', isLogged:isLoggedIn});
+
 });
 
 router.get('/issue/view/:id', function (req, res, next) {
