@@ -157,7 +157,7 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
 
                 var query = connection.query(
                     "INSERT INTO user (user_id, name, password) VALUES ('" + user_id + "','" + name + "','" + pwd + "'); INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id) VALUES (" + max + ",'" + title + "','"
-                    + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
+                    + connection.escape(desc) + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
                     + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + username + "');", [1,2], function (err, rows) {
                         if (err)
                             console.log("Error Inserting : %s ", err);
@@ -180,7 +180,7 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
 
                 var query = connection.query(
                     "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id) VALUES (" + max + ",'" + title + "','"
-                    + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
+                    + connection.escape(desc) + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
                     + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + req.user[0].user_id + "');", function (err, rows) {
                         if (err)
                             console.log("Error Inserting : %s ", err);
