@@ -5,7 +5,6 @@
     </div>
     <ul class="nav navbar-nav">
       <li class=""><a href="/submit">Submit an Issue</a></li>
-      <li class=""><a href="/user/my_account">Dashboard</a></li>
       <li><a href="/about">About Us</a></li>
     </ul>
     <div class="col-sm-3 col-md-3">
@@ -20,8 +19,13 @@
   		</form>
 		</div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/user/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <% if (!locals.isLogged) { %>
+        <li><a href="/user/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <% } else { %>
+        <li><a href="/user/dashboard">dashboard</a></li>
+        <li><a href="/user/logout">logout</a></li>
+      <% } %>
     </ul>
   </div>
 </nav>

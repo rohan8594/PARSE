@@ -1,0 +1,66 @@
+  <% if(data.length) { %>
+
+	 <% for(var i = 0;i < data.length;i++) {
+
+	  	 if(data[i].status=='1') { %>
+
+		  	<div class="row issue-listing completed">
+		  		<div class="col-md-3">
+		  			<%= data[i].title %>
+		  		</div>
+
+		  		<div class="col-md-3">
+		  			<%= data[i].description %>
+		  		</div>
+		  				
+		  		<div class="col-md-3" >
+		  			<form class="issue-list-item">
+		  				<input class="form-control hidden" type="hidden" value=<%=data[i].id%> name="id" />
+		  				<input class="form-control hidden" type="hidden" name="status" value="2" />
+		  				<button type="button" class="issue-button">Update Status</button>
+
+		  			</form>
+		  		</div>
+
+		  		<div class="col-md-3">
+		  			<span class="update-flag"></span>
+		  		</div>
+
+		  	</div>
+
+	  	<% } %>
+
+	  	<% if(data[i].status=='2') { %>
+		  	<div class="row issue-listing pending">
+		  		<div class="col-md-3">
+		  			<%= data[i].title %>
+		  		</div>
+
+		  		<div class="col-md-3 pending">
+		  			<%= data[i].description %>
+		  		</div>
+		  				
+		  		<div class="col-md-3" >
+		  			<form class="issue-list-item">
+		  				<input class="form-control hidden" type="hidden" value="<%=data[i].id%>" name="id" />
+		  				<input class="form-control hidden" type="hidden" name="status" value="1" />
+		  				<button type="button" class="issue-button">Update Status</button>
+		  			</form>
+		  		</div>
+
+		  		<div class="col-md-3">
+		  			<span class="update-flag"></span>
+		  		</div>
+		  	</div>
+
+	     <% } %>
+
+	  <% } %>
+
+  <% } else { %>
+
+
+  No issues to display.
+
+
+  <% } %>

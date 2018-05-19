@@ -32,7 +32,7 @@
         <div class="row">
 
             <!-- The filter side of the dashboard page -->
-            <div class="col-md-4" id="dashboard-filter">
+            <div class="col-md-2" id="dashboard-filter">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -47,12 +47,6 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12 filter-button" id="approved-filter-button">
-                        <h2 class="filter-title">Approved</h2>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col-md-12 filter-button" id="completed-filter-button">
                         <h2 class="filter-title">Completed</h2>
                     </div>
@@ -63,11 +57,11 @@
 
 
             <!-- The list of issues to update -->
-            <div class="col-md-8" id="dashboard-issues-list">
+            <div class="col-md-10" id="dashboard-issues-list">
 
-                <% include templates/account_pending_issues.ejs %>
-                <% include templates/account_approved_issues.ejs %>
-                <% include templates/account_completed_issues.ejs %>
+                <h1 id="pending-issue-title">Pending Issues</h1>
+                <h1 id="completed-issue-title">Completed Issues</h1>
+                <% include templates/account_issues.ejs %>
 
             </div>
 
@@ -100,27 +94,25 @@
         $(function() {
 
             // Filter code ---------------------------------------
-            $("#pending-issues").show();
-            $("#completed-issues").hide();
-            $("#approved-issues").hide();
+            $(".completed").hide();
+            $(".pending").show();
+            $("#completed-issue-title").hide();
 
-            $("#pending-filter-button").click(function() {
-                $("#pending-issues").show();
-                $("#completed-issues").hide();
-                $("#approved-issues").hide();
+
+            $("#pending-filter-button").on("click", function(e) {
+                $(".completed").hide();
+                $(".pending").show();
+                $("#completed-issue-title").hide();
+                $("#pending-issue-title").show();
             });
 
-            $("#approved-filter-button").click(function() {
-                $("#pending-issues").hide();
-                $("#completed-issues").hide();
-                $("#approved-issues").show();
+            $("#completed-filter-button").on("click", function(e) {
+                $(".completed").show();
+                $(".pending").hide();
+                $("#completed-issue-title").show();
+                $("#pending-issue-title").hide();
             });
 
-            $("#completed-filter-button").click(function() {
-                $("#pending-issues").hide();
-                $("#completed-issues").show();
-                $("#approved-issues").hide();
-            });
 
             // Submit code --------------------------------------------
 
@@ -144,20 +136,35 @@
                     }
                 });
 
-                // Update the update-flag
-                var updateFlag = $(this).parent().parent().find(".update-flag");
-                updateFlag.text("updated");
+                var pending = "pending";
+                var completed = "completed";
+
+                var el = $(this).parent().parent();
+                if (el.hasClass(pending)) {
+                    el.removeClass(pending);
+                    el.addClass(completed);
+                    //el.find(".issue-button").html("Set to Complete");
+                } else if (el.hasClass(completed)) {
+                    el.removeClass(completed);
+                    el.addClass(pending);
+                    //el.find(".issue-button").html("Set to Pending");
+                }
+                el.hide();
+
+
 
                 // Show the data so that we know it's working
+                /*
                 var alertMsg = "DEBUG MESSAGE\nSubmitted the following info:\n";
                 alert(alertMsg + $(this).serialize());
+                */
+
 
             });
 
-            // Change listener for the dropdown menu
             // It causes the form to submit
-            $(".category-dropdown").on("change", function(e) {
-                $(this).parent().parent().submit(); // The parent form
+            $(".issue-button").on("click", function(e) {
+                $(this).parent().submit(); // The parent form
             });
 
         });
