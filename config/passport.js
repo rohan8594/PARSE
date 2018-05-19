@@ -34,7 +34,7 @@ module.exports = function(passport) {
             },
             function(req, username, password, done) {
                 connection.query("SELECT * FROM user WHERE user_id = ?",[username], function(err, rows){
-                    console.log(rows[0]);
+                    //console.log(rows[0]);
                     if (err)
                         return done(err);
                     if (!rows.length) {

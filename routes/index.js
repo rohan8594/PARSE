@@ -156,7 +156,7 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
                 var query = connection.query(
                     "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status) VALUES (" + max + ",'" + title + "','"
                     + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
-                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ");"
+                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 1 + ");"
                     + "INSERT INTO user set ?", data,
                     function (err, rows) {
                         if (err)
@@ -181,7 +181,7 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
                 var query = connection.query(
                     "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status) VALUES (" + max + ",'" + title + "','"
                     + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
-                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ")", function (err, rows) {
+                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 1 + ")", function (err, rows) {
                         if (err)
                             console.log("Error Inserting : %s ", err);
                         res.redirect('/');

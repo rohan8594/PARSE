@@ -11,7 +11,7 @@ router.get('/my_account', function(req, res){
 
     if (req.isAuthenticated()){
         isLoggedIn = true;
-        if (req.user.isAdmin === 1)
+        if (req.user[0].isAdmin === 1)
         {
             isAnAdmin = true;
         }
