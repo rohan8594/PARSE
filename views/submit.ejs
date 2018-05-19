@@ -10,6 +10,8 @@
 
     <title>Submit</title>
 
+    <!-- Custom styles for this template -->
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
 
     <!-- Stylesheets -->
     <% include templates/stylesheet-refs.ejs %>
@@ -29,10 +31,10 @@
 <main role="main">
 
 
-    <div class="container">
+    <div class="container-fluid bg">
         <!-- begin container -->
-
-        <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
 
             <!--Form Validation-->
             <% if(locals.errors){
@@ -40,7 +42,7 @@
             <div class="alert alert-danger"><%=errors[i].msg%> </div>
             <%}}%>
 
-            <form method="post" enctype="multipart/form-data" action="/post_issue">
+            <form class="form-container" method="post" enctype="multipart/form-data" action="/post_issue">
 
                 <div class="form-group">
                     <label>Title</label>
