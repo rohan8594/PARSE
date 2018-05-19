@@ -18,19 +18,20 @@
 <% include templates/navigation.ejs %>
 <!-- END OF NAVIGATION BAR -->
 
-	<div class="container">
+	<div class="container-fluid bg">
 	  <div class="row">
 	  	<div class="col-md-4 col-sm-4 col-xs-12"></div>
 	  	<div class="col-md-4 col-sm-4 col-xs-12">
-            <% if(locals.errors){
 
-            for(var i = 0;i < errors.length;i++) { %>
-
-            <div class="alert alert-danger"><%=errors[i].msg%> </div>
-
-            <%}}%>
 				<form class="form-container" method="post" action="/user/signup">
 				  <h1>PARSE Registration</h1>
+
+				  	  <!--Form Validation-->
+		  			  <% if(locals.errors){
+          			  for(var i = 0;i < errors.length;i++) { %>
+         			   <div class="alert alert-danger">*<%=errors[i].msg%> </div>
+         			  <%}}%>
+
 					<div class="form-group">
 						<input type="name" class="form-control" id="exampleName" placeholder="Name" name="Name">
 					</div>

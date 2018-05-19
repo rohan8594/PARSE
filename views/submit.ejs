@@ -10,11 +10,6 @@
 
     <title>Submit</title>
 
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <!-- Custom styles for this template -->
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 
@@ -35,27 +30,18 @@
 
 <main role="main">
 
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
-            <p class="lead text-muted">
-                Environmental Reporting Tool<br>
-                This website is the term project for CSC648/848's Team 04.
-            </p>
-        </div>
-    </section>
 
     <div class="container">
         <!-- begin container -->
 
         <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+
+            <!--Form Validation-->
             <% if(locals.errors){
-
             for(var i = 0;i < errors.length;i++) { %>
-
             <div class="alert alert-danger"><%=errors[i].msg%> </div>
-
             <%}}%>
+
             <form method="post" enctype="multipart/form-data" action="/post_issue">
 
                 <div class="form-group">
@@ -76,7 +62,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Zip Code</label>
+                    
                     <input type="text" class="form-control" placeholder="Zip Code" name="zipcode" id="zip_code">
                 </div>
 
@@ -104,7 +90,7 @@
                 <% if(!locals.isLogged) { %>
                 <div>
                     <div class="form-group">
-                        <h3 style="color:black">Please Create an Account</h3>
+                        <h3 style="color:white">Please Create an Account</h3>
                         <input type="name" class="form-control" id="exampleName" placeholder="Name" name="Name">
                     </div>
                     <div class="form-group">
