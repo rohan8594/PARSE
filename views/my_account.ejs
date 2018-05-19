@@ -29,10 +29,6 @@
     <div class="container">
 
     <% if(locals.isAdmin){ %>
-        <div>YOU'RE AN ADMIN!</div>
-        <%} else { %>
-        <div>Not an admin...</div>
-        <% } %>
         <div class="row">
 
             <!-- The filter side of the dashboard page -->
@@ -69,14 +65,26 @@
             <!-- The list of issues to update -->
             <div class="col-md-8" id="dashboard-issues-list">
 
-                    <% include templates/account_pending_issues.ejs %>
-                    <% include templates/account_approved_issues.ejs %>
-                    <% include templates/account_completed_issues.ejs %>
+                <% include templates/account_pending_issues.ejs %>
+                <% include templates/account_approved_issues.ejs %>
+                <% include templates/account_completed_issues.ejs %>
 
             </div>
 
 
         </div>
+        <%} else { %>
+        <section class="jumbotron text-center">
+        <div class="container">
+            <h1>Welcome, </h1>
+            <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
+            <p class="lead text-muted">
+                Environmental Reporting Tool<br>
+                This website is the term project for CSC648/848's Team 04.
+            </p>
+        </div>
+        </section>
+        <% } %>
 
     </div>
 
