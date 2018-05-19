@@ -54,7 +54,17 @@ router.get('/login', function(req, res) {
     }
 });
 
-router.post('/login', passport.authenticate('local-login', {
+router.post('/login', function(req, res, next) {
+        req.checkBody('username', 'Username cannot be empty').notEmpty();
+        req.checkBody('password', 'Password cannot be empty').notEmpty();
+        var errors = req.validationErrors();
+
+        if(errors){
+        res.render('login',{
+            message: "Username and Password cannot be empty"
+        });
+
+    }},passport.authenticate('local-login', {
         successRedirect : '/user/my_account',
         failureRedirect : '/user/login',
         failureFlash : true
