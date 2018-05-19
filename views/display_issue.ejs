@@ -23,14 +23,14 @@
         <% include templates/navigation.ejs %>
         <!-- END OF NAVIGATION BAR -->
     </header>
-    
+
     <div class="container">
         <a href="/" class="btn btn-info">Back to search results</a>
         <!-- Image pane -->
         <div class="row">
             <div class="col-md-6 pane">
                 <h1><%=data[0].title%></h1>
-                <img class="issue-image" src=<%=data[0].image%> />   
+                <img class="issue-image" src=<%=data[0].image%> />
                 <div class="fields">
                     <h2 class="field-title">Submitted by: </h2>
                     <p><%=data[0].name%></p>

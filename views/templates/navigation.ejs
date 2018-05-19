@@ -1,60 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .search-container {
-            float: right;
-        }
-        .search-container input[type=text] {
-            padding: 4px;
-            margin-top: 0px;
-            font-size: 17px;
-            border: none;
-        }
-        .search-container button {
-            float: right;
-            padding: 4px 10px;
-            margin-top: 0px;
-            margin-right: 4px;
-            background: #ddd;
-            font-size: 17px;
-            border: none;
-            cursor: pointer;
-        }
-        .search-container button:hover {
-            background: #ccc;
-        }
-    </style>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">PARSE</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/submit">Submit an Issue</a>
-            <a class="nav-item nav-link" href="/about">About</a>
-        </div>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">PARSE</a>
     </div>
-    <div class="navbar-nav">
-        <% if(!locals.isLogged) { %>
-        <a class="nav-item nav-link active" href="/user/login">Login</a>
-        <a class="nav-item nav-link active" href="/user/register">Sign up</a>
-        <% } else { %>
-        <a class="nav-item nav-link active" href="/user/my_account">Dashboard</a>
-        <a class="nav-item nav-link active" href="/user/logout">Logout</a>
-        <% } %>
-    </div> &nbsp; &nbsp;
-    <div class="search-container">
-        <form action="/search_results" method="get">
-            <input type="text" placeholder="Zipcode.." name="zip_code">
+    <ul class="nav navbar-nav">
+      <li class=""><a href="/submit">Submit an Issue</a></li>
+      <li class=""><a href="/user/my_account">Dashboard</a></li>
+      <li><a href="/about">About Us</a></li>
+    </ul>
+    <div class="col-sm-3 col-md-3">
+  		<form class="navbar-form text-center" role="search" action="/search_results" method="get">
+    		<div class="input-group">
+    			<input type="text" class="form-control" placeholder="Enter Zipcode:" name="zip_code" id="srch-term">
+    			<div class="input-group-btn">
+    				<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             <input type="hidden" name="issue_category" value=""/>
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-    </div>
+    			</div>
+    		</div>
+  		</form>
+		</div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/user/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
 </nav>
-</body>
-</html>
