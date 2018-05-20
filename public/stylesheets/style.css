@@ -337,6 +337,10 @@ footer p {
   background-color: black
 }
 
+.page-footer p, h4 {
+  color: white;
+}
+
 
 /* BANNER styling */
 .project-banner {

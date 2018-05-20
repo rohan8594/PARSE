@@ -10,11 +10,15 @@
 
     <title>Submit</title>
 
-    <!-- Custom styles for this template -->
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-
     <!-- Stylesheets -->
     <% include templates/stylesheet-refs.ejs %>
+
+    <style>
+        .page-footer {
+            margin-top: 300px;
+        }
+    </style>
+
 
     <!-- Google Analytics snippet -->
     <% include templates/google-analytics.ejs %>
@@ -112,22 +116,14 @@
 
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
+            <br/>
         </div>
         <!-- End container -->
     </div>
 </main>
 
-<footer class="text-muted">
-    <div class="container">
-        <!-- Default Bootstrap Footer
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-      <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-      <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-  -->
-    </div>
-</footer>
+<!-- FOOTER code -->
+<% include templates/footer.ejs %>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
