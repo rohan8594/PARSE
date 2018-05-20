@@ -25,31 +25,36 @@
     </header>
 
     <div class="container">
+      <div class="row">
+        <h1><%=data[0].title%></h1>
+      </div>
         <a href="/" class="btn btn-info">Back to search results</a>
         <!-- Image pane -->
         <div class="row">
             <div class="col-md-6 pane">
-                <h1><%=data[0].title%></h1>
-                <div class="fields">
+                <!-- <div class="fields">
                     <h2 class="field-title">Submitted on: </h2>
                     <p><%=date%></p>
-                </div>
-                <img class="issue-image" src=<%=data[0].image%> />
+                </div> -->
+                <img class="issue-info" src=<%=data[0].image%> />
                 <div class="fields">
-                    <h2 class="field-title">Submitted by: </h2>
-                    <p><%=data[0].name%></p>
-                    <h2 class="field-title">Zip-code: </h2>
-                    <p><%=data[0].zipcode%></p>
-                    <h2 class="field-title">Description:</h2>
-                    <p><%=data[0].description%></p>
-                    <h2 class="field-title">Issue status: </h2>
-                    <p><%=data[0].status%></p>
+
                 </div>
             </div>
             <!-- google maps pane -->
             <div class="col-md-6 pane">
                 <%include templates/google-maps.ejs%>
             </div>
+        </div>
+        <div class="row">
+          <h2 class="field-title">Submitted by: </h2>
+          <p><%=data[0].name%></p>
+          <h2 class="field-title">Zip-code: </h2>
+          <p><%=data[0].zipcode%></p>
+          <h2 class="field-title">Description:</h2>
+          <p><%=data[0].description%></p>
+          <h2 class="field-title">Issue status: </h2>
+          <p><%=data[0].status%></p>
         </div>
     </div>
 
