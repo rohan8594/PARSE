@@ -9,8 +9,7 @@ h3 {
 }
 
 .issue-image {
-  width: 75%;
-  height: 75%;
+  width: 100%;
   border-radius: 25px;
 }
 
@@ -35,7 +34,7 @@ h3 {
 }
 
 .field-title {
-  color: black;
+  color: white;
   font-family: sans-serif;
 }
 
@@ -48,6 +47,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .title {
@@ -77,13 +77,35 @@ body {
 /*listing title*/
 h1{
   font-family: sans-serif;
+  color: white;
+  padding-left: 50px;
 }
 
 /*details pane*/
-.pane {
-  /*border-style: solid;*/
-  background-color: rgba(0, 0, 0, 0.5);
+
+.issue-info {
+  width:100%;
   border-radius: 20px;
+  /* height: 450px; */
+}
+
+p {
+  font-family: sans-serif;
+}
+
+.descript {
+  font-family: sans-serif;
+  color: white;
+}
+
+.pane {
+  padding: 5%;
+  height: 450px;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  border-radius: 20px;
+}
+table {
+  background-color: white;
 }
 
 /* --------------------------- DASHBOARD PAGE ------------------------------ */
@@ -270,7 +292,7 @@ footer p {
   margin-bottom: .25rem;
 }
 #map {
-  min-height: 575px;
+  /* min-height: 575px; */
 }
 
 .box-shadow {
