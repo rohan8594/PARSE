@@ -1,3 +1,5 @@
+/***** PASSPORT CONFIG FILE *****/
+
 var LocalStrategy   = require('passport-local').Strategy;
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
@@ -13,6 +15,13 @@ var creds = {
 
 var connection = mysql.createPool(creds);
 
+
+/**
+ * This is where the passport strategy "local-login" lives, which authenticates a user when they log in.
+ * Upon logging in, the strategy first checks that their credentials are valid, then uses serializeUser to store their user_id.
+ * deserializeUser then uses this id to select the row from the database and store the object in our session to use. \
+ * @param passport
+ */
 module.exports = function(passport) {
 
     passport.serializeUser(function(user, done) {

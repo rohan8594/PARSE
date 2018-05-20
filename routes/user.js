@@ -5,6 +5,11 @@ var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
 var passport = require('passport');
 
+/**
+ * my_account GET method
+ * Server first checks to see if the user is logged in, and then checks if they are an admin.
+ * Then we query the database to obtain all of the issue rows to display on the dashboard.
+ */
 router.get('/my_account', function(req, res){
     var isLoggedIn = false;
     var isAnAdmin = false;
@@ -33,6 +38,12 @@ router.get('/my_account', function(req, res){
     }
 });
 
+
+/**
+ * update_status POST method
+ * Controller Action to update the database after an ajax call from the view.
+ * Query takes the id and status from the body and uses it to update the proper issue.
+ */
 router.post('/update_status', function(req, res){
     console.log('body: ' + JSON.stringify(req.body));
 
@@ -46,6 +57,11 @@ router.post('/update_status', function(req, res){
     });
 });
 
+
+/**
+ * login GET method
+ * Displays login page along with any errors returned during form validation.
+ */
 router.get('/login', function(req, res) {
     var isLoggedIn = false;
     if (req.isAuthenticated()){
@@ -56,6 +72,13 @@ router.get('/login', function(req, res) {
     }
 });
 
+
+/**
+ * login POST method
+ * Uses passport to verify user credentials and then log them in.
+ * On successful validation, the user is then logged in, and their session is kept in a cookie if they choose "remember me".
+ * On failed validation, user is sent back to login page with error listed.
+ */
 router.post('/login',passport.authenticate('local-login', {
         successRedirect : '/user/my_account',
         failureRedirect : '/user/login',
@@ -70,11 +93,21 @@ router.post('/login',passport.authenticate('local-login', {
         res.redirect('/');
     });
 
+
+/**
+ * logout GET method
+ * Logs user out of session and redirects them to the login page.
+ */
 router.get('/logout', function(req, res){
     req.logout();
     res.render('login', {message: req.flash('You have been logged out.')});
 });
 
+
+/**
+ * register GET method
+ * Brings user to the registration page, but first checks to see if they are logged in and redirects them to their dashboard.
+ */
 router.get('/register', function (req, res, next) {
     var isLoggedIn = false;
     if (req.isAuthenticated()){
@@ -84,8 +117,12 @@ router.get('/register', function (req, res, next) {
         res.render('register', {message: req.flash('loginMessage'), isLogged:isLoggedIn});
     }});
 
-
-
+/**
+ * signup POST method
+ * Registers a new user.
+ * Form validation occurs first, checks to see if username and password are not empty and meet the requirements.
+ * If requirements are met, a query inserts them into the database, using bcrypt to hash their passwords.
+ */
 router.post('/signup', function(req, res){
     var username = req.body.username;
     var name = req.body.Name;
