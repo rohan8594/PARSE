@@ -50,6 +50,11 @@ body {
   background-attachment: fixed;
 }
 
+.title {
+  color: white;
+  text-align: center;
+}
+
 .container {
   /*background-color: rgba(255, 255, 255, 0.6);*/
   /*height: 100%;*/
@@ -57,6 +62,8 @@ body {
 
 /* Results display code */
 .thumbnail-image {
+  margin: 0 auto;
+  display: block;
   height: 80px;
   width: 80px;
   border-radius: 10%;
@@ -94,7 +101,6 @@ h1{
 }
 
 #dashboard-filter {
-  min-height: 500px;
   padding: 20px;
 }
 
@@ -129,6 +135,8 @@ h1{
   padding: 20px;
   opacity: 0.85;
   border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 5px black;
+  -moz-box-shadow: 5px 5px 5px black;
   box-shadow: 5px 5px 5px black;
 }
 
@@ -156,8 +164,24 @@ h1{
 
 /* Search Result CSS */
 
+#submit-button {
+  top: 0px;
+}
+
+.search-bar {
+  padding: 0px;
+}
+
+.search-bar-item {
+  height: 45px;
+  width: 100%;
+  padding: 10px;
+}
+
 .home-search-result {
   background-color: #b9d1f7;
+  -webkit-box-shadow: 1px 1px 1px #484f5b;
+  -moz-box-shadow: 1px 1px 1px #484f5b;
   box-shadow: 1px 1px 1px #484f5b;
   border-radius: 5px;
   padding: 10px;
@@ -184,6 +208,22 @@ h1{
 
 #search-result-zipcode {
 
+}
+
+.issue-button {
+  margin: 0 auto;
+  display: block;
+  padding: 10px;
+}
+
+/* FORM VALIDATION */
+
+.validation-message-box {
+  height: 30px;
+}
+
+.validation-message {
+  color: red;
 }
 
 
@@ -236,7 +276,11 @@ footer p {
   /* min-height: 575px; */
 }
 
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.box-shadow {
+  -webkit-box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  -moz-box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
 
 /* Registration Form Validation*/
 
@@ -280,7 +324,7 @@ footer p {
 .col{
   align-content: center;
   border: 1px black;
-  padding: 20px 40px;
+  padding: 0px 40px 30px 40px;
   margin-top: 10vh;
   margin-bottom: 10vh;
   -webkit-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
