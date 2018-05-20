@@ -76,7 +76,9 @@ router.get('/issue/view/:id', function (req, res, next) {
             if (err)
                 console.log("Error Selecting : %s ", err);
 
-            res.render('display_issue', {page_title: "View Result", data: rows, isLogged:isLoggedIn});
+            var formatted_date = moment.tz(rows[0].date, 'America/Los_Angeles').format('MMMM Do YYYY, h:mm a').toString();
+            //console.log(formatted_date);
+            res.render('display_issue', {page_title: "View Result", data: rows, isLogged:isLoggedIn, date: formatted_date});
 
 
         });
