@@ -43,7 +43,7 @@
                 <div class="row">
                     <select id="filter-dropdown">
                         <option value="2">Pending</option>
-                        <option value="1">Complete</option>
+                        <option value="3">Complete</option>
                         <option>All</option>
                     </select>
                 </div>
@@ -99,7 +99,7 @@
 
 
             $("#filter-dropdown").on("change", function(e) {
-                if ($(this).val() === "1") {
+                if ($(this).val() === "3") {
                     $(".completed").show();
                     $(".pending").hide();
                     $("#completed-issue-title").show();
