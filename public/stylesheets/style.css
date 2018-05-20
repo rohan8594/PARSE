@@ -88,10 +88,20 @@ h1{
   border-radius: 20px;
   /* height: 450px; */
 }
+
+p {
+  font-family: sans-serif;
+}
+
+.descript {
+  font-family: sans-serif;
+  color: white;
+}
+
 .pane {
   padding: 5%;
   height: 450px;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
   border-radius: 20px;
 }
 
