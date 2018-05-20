@@ -28,6 +28,11 @@
 
 <main role="main">
 
+    <% if(!locals.isLogged) { %>
+    <!-- Welcome message -->
+        <% include templates/welcome_message.ejs %>
+    <% } %>
+
     <div class="container">
         <!-- begin container -->
         <% include templates/search_bar_template.ejs %>
