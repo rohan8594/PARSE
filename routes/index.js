@@ -5,6 +5,7 @@ var mysql = require('mysql');
 var fs = require('fs');
 var bcrypt = require('bcrypt-nodejs');
 var thumb = require('node-thumbnail').thumb;
+var moment = require('moment-timezone');
 var multer  = require('multer');
 var cloudinary = require('cloudinary');
 var storage = multer.diskStorage({
@@ -31,6 +32,7 @@ var max = null;
 
 /* GET home page. */
 router.get('/', function (req, res) {
+
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
@@ -40,7 +42,7 @@ router.get('/', function (req, res) {
 
         var query = connection.query("SELECT issue.id, issue.title, category.name, issue.thumbnail, " +
         "issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id " +
-        "WHERE issue.status != 1; SELECT name FROM category", [1,2], function(err,rows) {
+        "WHERE issue.status != 1 ORDER BY issue.Date desc; SELECT name FROM category", [1,2], function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
@@ -122,6 +124,8 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
         var address = req.body.address;
         var latitude = req.body.Lat;
         var longitude = req.body.Lng;
+        var date = new moment();
+        var formatted_date = moment.tz(date, 'America/Los_Angeles').format('YYYY-MM-DD HH:mm:ss');
 
         req.checkBody('title', 'Title is required').notEmpty();
         req.checkBody('description', 'Description is required').notEmpty();
@@ -157,7 +161,7 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
                 var query = connection.query(
                     "INSERT INTO user (user_id, name, password) VALUES ('" + user_id + "','" + name + "','" + pwd + "'); INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id) VALUES (" + max + ",'" + title + "','"
                     + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
-                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + username + "');", [1,2], function (err, rows) {
+                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + username + "','" + formatted_date + "');", [1,2], function (err, rows) {
                         if (err)
                             console.log("Error Inserting : %s ", err);
                         res.redirect('/');
@@ -178,9 +182,9 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
             req.getConnection(function (err, connection) {
 
                 var query = connection.query(
-                    "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id) VALUES (" + max + ",'" + title + "','"
+                    "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id, date) VALUES (" + max + ",'" + title + "','"
                     + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
-                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + req.user[0].user_id + "');", function (err, rows) {
+                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + req.user[0].user_id + "','" + formatted_date + "');", function (err, rows) {
                         if (err)
                             console.log("Error Inserting : %s ", err);
                         res.redirect('/');
