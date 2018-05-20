@@ -116,8 +116,7 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
         //console.log('thumbnail url:' + thumbnail_url);
 
         var title = req.body.title.replace(/'/g, "\\'");
-        var desc = req.body.description;
-        var desc = desc.replace(/'/g, "\\'");
+        var desc = req.body.description.replace(/'/g, "\\'");
         var zipcode = req.body.zipcode;
         var category = req.body.issue_category;
         var address = req.body.address;
@@ -147,7 +146,6 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
             max = max + 1;
 
             var user_id = username;
-            var name = name;
             var pwd = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
             console.log(user_id);
