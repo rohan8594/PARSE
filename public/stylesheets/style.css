@@ -172,6 +172,10 @@ h1{
 
 }
 
+.search-bar {
+  padding: 30px;
+}
+
 
 /* SUBMIT AN ISSUE PAGE css */
 #submit-issue-desc-field {
