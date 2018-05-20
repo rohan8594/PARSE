@@ -177,6 +177,10 @@ table {
 
 /* Search Result CSS */
 
+.navbar-search-box {
+  min-width: 230px;
+}
+
 #submit-button {
   top: 0px;
 }
@@ -372,6 +376,7 @@ footer p {
   text-align: center;
 }
 
-.project-banner h3 {
+.project-banner span {
   color: black;
+  font-size: 20px;
 }
