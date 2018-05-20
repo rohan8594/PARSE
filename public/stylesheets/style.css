@@ -104,6 +104,9 @@ p {
   /* background-color: rgba(0, 0, 0, 0.5); */
   border-radius: 20px;
 }
+table {
+  background-color: white;
+}
 
 /* --------------------------- DASHBOARD PAGE ------------------------------ */
 .bordered {
