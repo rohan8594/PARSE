@@ -115,8 +115,9 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
         //console.log('full image url:' + image_url);
         //console.log('thumbnail url:' + thumbnail_url);
 
-        var title = req.body.title;
+        var title = req.body.title.replace(/'/g, "\\'");
         var desc = req.body.description;
+        var desc = desc.replace(/'/g, "\\'");
         var zipcode = req.body.zipcode;
         var category = req.body.issue_category;
         var address = req.body.address;

@@ -62,6 +62,11 @@ body {
   border-radius: 10%;
 }
 
+.social-icon {
+  height: 20px;
+  width: 20px;
+}
+
 /*listing title*/
 h1{
   font-family: sans-serif;
@@ -176,7 +181,6 @@ h1{
 /* SUBMIT AN ISSUE PAGE css */
 #submit-issue-desc-field {
   min-height: 200px;
-  text-align:
 }
 
 
@@ -227,7 +231,7 @@ footer p {
 .alert-danger{
   border: 1px black;
   padding: 5px 5px;
-  color: AB0000;
+  color: #AB0000;
   background-color: rgba(255, 255, 255, 0.6);
   -webkit-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
