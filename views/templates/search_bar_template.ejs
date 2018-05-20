@@ -18,34 +18,37 @@
 -->
 
 <div class="row">
-    <div class="col-md-8 offset-md-2">
-        <form action="/search_results" method="get" class="text-center">
-            <div class="row">
-                <div class="col-md-6">
-                    <input id="title" type="text" name="zip_code" placeholder="Enter Zipcode:" class="col-md-8">
-                </div>
+  <div class="col-md-2"></div>
+  <div class="col col-md-8">
+    <form action="/search_results" method="get" class="text-center">
+      <div class="row">
+
+        <div class="col-md-3 search-bar">
+          <select class="search-bar-item" id="issue-category-select" name="issue_category">
+            <% if(category.length){ %>
+              <option value="" selected>Select category</option>
+              <% for(var i = 0;i < category.length;i++) { %>
+              <option><%= category[i].name %></option>
+              <% }
+
+              }else{ %>
+              <option>
+              No categories
+              </option>
+              <% } %>
+          </select>
+        </div>
+
+        <div class="col-md-6 search-bar">
+          <input class="search-bar-item" id="title" type="text" name="zip_code" placeholder="Enter Zipcode" class="col-md-8">
+        </div>
+        <div class="col-md-3 search-bar">
+          <button class="search-bar-item" id="submit-button" type="submit">Search</button>
+        </div>
 
 
-                <div class="col-md-3">
-                    <select name="issue_category">
-                        <% if(category.length){ %>
-                        <option value="" selected>Select your category</option>
-                        <% for(var i = 0;i < category.length;i++) { %>
-                        <option><%= category[i].name %></option>
-                        <% }
 
-                        }else{ %>
-                        <option>
-                            No categories
-                        </option>
-                        <% } %>
-                    </select>
-                </div>
-
-                <div class="col-md-3">
-                    <button type="submit">Search</button>
-                </div>
-            </div>
-        </form>
-    </div>
+      </div>
+    </form>
+  </div>
 </div>

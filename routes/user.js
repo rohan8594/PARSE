@@ -11,27 +11,52 @@ router.get('/my_account', function(req, res){
 
     if (req.isAuthenticated()){
         isLoggedIn = true;
-        if (req.user.isAdmin === 1)
+        if (req.user[0].isAdmin === 1)
         {
             isAnAdmin = true;
         }
-    }
 
-   res.render('my_account', { message: req.flash('loginMessage'), isLogged: isLoggedIn, isAdmin: isAnAdmin});
+        req.getConnection(function(err, connection) {
+
+        var query = connection.query("SELECT issue.id, issue.status, issue.title, category.name, issue.thumbnail, " +
+            "issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id; " +
+            "SELECT name FROM category", [1,2], function(err,rows) {
+            if(err)
+                console.log("Error Selecting : %s ",err );
+            
+            res.render('my_account', {message: req.flash('loginMessage'), title: 'Team 04', data: rows[0], category:rows[1], isLogged:isLoggedIn, isAdmin: isAnAdmin});
+            //console.log(rows)
+        });
+    });
+    } else {
+        res.redirect('/user/login');
+    }
 });
 
+router.post('/update_status', function(req, res){
+    console.log('body: ' + JSON.stringify(req.body));
+
+    req.getConnection(function(err, connection){
+       var query = connection.query("UPDATE issue SET status='" + req.body.status + "' WHERE id='" + req.body.id  + "';", function(err){
+           if(err) console.log("Error Updating : %s ",err );
+           res.send(req.body);
+
+       });
+
+    });
+});
 
 router.get('/login', function(req, res) {
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
-        res.redirect('/my_account');
+        res.redirect('/user/my_account');
     } else {
         res.render('login', {message: req.flash('loginMessage'), isLogged:isLoggedIn});
     }
 });
 
-router.post('/login', passport.authenticate('local-login', {
+router.post('/login',passport.authenticate('local-login', {
         successRedirect : '/user/my_account',
         failureRedirect : '/user/login',
         failureFlash : true

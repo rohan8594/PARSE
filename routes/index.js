@@ -44,10 +44,20 @@ router.get('/', function (req, res) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('index', {title: 'Team 04', data: rows[0], category:rows[1]});
+            res.render('index', {title: 'Team 04', data: rows[0], category:rows[1], isLogged:isLoggedIn});
             //console.log(rows)
         });
     });
+});
+
+
+router.get('/about', function (req, res){
+    var isLoggedIn = false;
+    if (req.isAuthenticated()){
+        isLoggedIn = true;
+    }
+    res.render('about', {title: 'Team 04', isLogged:isLoggedIn});
+
 });
 
 router.get('/issue/view/:id', function (req, res, next) {
@@ -105,8 +115,8 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
         //console.log('full image url:' + image_url);
         //console.log('thumbnail url:' + thumbnail_url);
 
-        var title = req.body.title;
-        var desc = req.body.description;
+        var title = req.body.title.replace(/'/g, "\\'");
+        var desc = req.body.description.replace(/'/g, "\\'");
         var zipcode = req.body.zipcode;
         var category = req.body.issue_category;
         var address = req.body.address;
@@ -135,20 +145,19 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
                 });
             max = max + 1;
 
-            var data = {
-                user_id: username,
-                name: name,
-                password: bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-            };
+            var user_id = username;
+            var pwd = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+
+            console.log(user_id);
+            console.log(name);
+            console.log(pwd);
 
             req.getConnection(function (err, connection) {
 
                 var query = connection.query(
-                    "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status) VALUES (" + max + ",'" + title + "','"
+                    "INSERT INTO user (user_id, name, password) VALUES ('" + user_id + "','" + name + "','" + pwd + "'); INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id) VALUES (" + max + ",'" + title + "','"
                     + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
-                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 1 + ");"
-                    + "INSERT INTO user set ?", data,
-                    function (err, rows) {
+                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + username + "');", [1,2], function (err, rows) {
                         if (err)
                             console.log("Error Inserting : %s ", err);
                         res.redirect('/');
@@ -169,9 +178,9 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
             req.getConnection(function (err, connection) {
 
                 var query = connection.query(
-                    "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status) VALUES (" + max + ",'" + title + "','"
+                    "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id) VALUES (" + max + ",'" + title + "','"
                     + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
-                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 1 + ")", function (err, rows) {
+                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + req.user[0].user_id + "');", function (err, rows) {
                         if (err)
                             console.log("Error Inserting : %s ", err);
                         res.redirect('/');

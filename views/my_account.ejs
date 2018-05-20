@@ -29,49 +29,148 @@
     <div class="container">
 
     <% if(locals.isAdmin){ %>
-        <div>YOU'RE AN ADMIN!</div>
-        <%} else { %>
-        <div>Not an admin...</div>
-        <% } %>
         <div class="row">
 
             <!-- The filter side of the dashboard page -->
-            <div class="col-md-4" id="dashboard-filter">
+            <div class="col-md-2" id="dashboard-filter">
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title">Filter by:</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <select id="filter-dropdown">
+                        <option value="2">Pending</option>
+                        <option value="1">Complete</option>
+                        <option>All</option>
+                    </select>
+                </div>
 
 
             </div>
 
 
             <!-- The list of issues to update -->
-            <div class="col-md-8" id="dashboard-issues-list">
+            <div class="col-md-10" id="dashboard-issues-list">
 
-                
+                <h1 id="pending-issue-title" class="title">Pending Issues</h1>
+                <h1 id="completed-issue-title" class="title">Completed Issues</h1>
+                <h1 id="all-issue-title" class="title">All Issues</h1>
+                <% include templates/account_issues.ejs %>
 
             </div>
 
 
         </div>
+        <%} else { %>
+        <section class="jumbotron text-center">
+        <div class="container">
+            <h1>Welcome, </h1>
+            <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
+            <p class="lead text-muted">
+                Environmental Reporting Tool<br>
+                This website is the term project for CSC648/848's Team 04.
+            </p>
+        </div>
+        </section>
+        <% } %>
 
     </div>
 
-    <footer class="text-muted">
-        <div class="container">
-            <!-- Default Bootstrap Footer
-          <p class="float-right">
-            <a href="#">Back to top</a>
-          </p>
-          <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-          <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-      -->
-        </div>
-    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- Script references -->
     <% include templates/javascript-refs.ejs %>
+
+    <script type="text/javascript">
+
+        $(function() {
+
+            // Filter code ---------------------------------------
+            $(".completed").hide();
+            $(".pending").show();
+            $("#pending-issue-title").show();
+            $("#completed-issue-title").hide();
+            $("#all-issue-title").hide();
+
+
+            $("#filter-dropdown").on("change", function(e) {
+                if ($(this).val() === "1") {
+                    $(".completed").show();
+                    $(".pending").hide();
+                    $("#completed-issue-title").show();
+                    $("#pending-issue-title").hide();
+                    $("#all-issue-title").hide();
+                } else if ($(this).val() === "2") {
+                    $(".completed").hide();
+                    $(".pending").show();
+                    $("#all-issue-title").hide();
+                    $("#completed-issue-title").hide();
+                    $("#pending-issue-title").show();
+                } else {
+                    $(".completed").show();
+                    $(".pending").show();
+                    $("#all-issue-title").show();
+                    $("#completed-issue-title").hide();
+                    $("#pending-issue-title").hide();
+
+                }
+            });
+
+
+            // Submit code --------------------------------------------
+
+            // Submit Listener for the "form"
+            // This event will update the database with the new issue status.
+            $(".issue-list-item").on("submit", function(e) {
+                e.preventDefault(); // Prevent the page from refreshing
+                var el = $(this).parent().parent();
+
+                // Ajax request will go here to update the database
+                var data = $(this).serialize();
+                data.title = "title";
+                data.message = "message";
+                $.ajax({
+                    type: 'POST',
+                    data: data,
+                    url: '/user/update_status',
+                    success: function() {
+                        var pending = "pending";
+                        var completed = "completed";
+
+                        if (el.hasClass(pending)) {
+                            el.removeClass(pending);
+                            el.addClass(completed);
+                            el.find(".issue-button").html("Set to Pending");
+                        } else if (el.hasClass(completed)) {
+                            el.removeClass(completed);
+                            el.addClass(pending);
+                            el.find(".issue-button").html("Set to Complete");
+                        }
+                        el.hide();
+                    }
+                });
+
+                // Show the data so that we know it's working
+                /*
+                var alertMsg = "DEBUG MESSAGE\nSubmitted the following info:\n";
+                alert(alertMsg + $(this).serialize());
+                */
+
+
+            });
+
+            // It causes the form to submit
+            $(".issue-button").on("click", function(e) {
+                $(this).parent().submit(); // The parent form
+            });
+
+        });
+    </script>
 
 </body>
 </html>

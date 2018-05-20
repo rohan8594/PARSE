@@ -51,8 +51,8 @@ body {
 }
 
 .container {
-  background-color: rgba(255, 255, 255, 0.6);
-  height: 100%;
+  /*background-color: rgba(255, 255, 255, 0.6);*/
+  /*height: 100%;*/
 }
 
 /* Results display code */
@@ -62,8 +62,9 @@ body {
   border-radius: 10%;
 }
 
-.navbar {
-  
+.social-icon {
+  height: 20px;
+  width: 20px;
 }
 
 /*listing title*/
@@ -74,25 +75,79 @@ h1{
 /*details pane*/
 .pane {
   /*border-style: solid;*/
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
 }
 
-/* Dashboard page */
-#dashboard-filter {
-  background-color: yellow; /* Placeholder color so that we know where it is. */
-  min-height: 500px;
+/* --------------------------- DASHBOARD PAGE ------------------------------ */
+.bordered {
+   border-style: solid; /* This is purely for testing purposes so that we know where the divs are. */
 }
 
-#dashboard-issues-list {
-  background-color: blue; /* Placeholder color so that we know where it is. */
+#dashboard-filter {
   min-height: 500px;
+  padding: 20px;
+}
+
+#dashboard-filter h1 {
+  text-align: center;
+}
+
+#filter-dropdown {
+  border-radius: 0px;
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+}
+
+#filter-dropdown option {
+  text-align: center;
+  font-size: 20px;
+}
+
+
+#dashboard-issues-list {
+  min-height: 500px;
+  padding: 20px;
+}
+
+.issues-title {
+  text-align: center;
+}
+
+.issue-listing{
+  margin-top: 10px;
+  padding: 20px;
+  opacity: 0.85;
+  border-radius: 15px;
+  box-shadow: 5px 5px 5px black;
+}
+
+.pending {
+  background-color: #fcf3a6;
+}
+
+.completed {
+  background-color: #b9fcb3;
+}
+
+.form-element {
+  display: inline-block;
+  margin:0;
+}
+
+.issues-container {
+  min-width: 100%;
+}
+
+.hidden {
+  display: none;
 }
 
 
 /* Search Result CSS */
 
 .home-search-result {
-
   background-color: #b9d1f7;
   box-shadow: 1px 1px 1px #484f5b;
   border-radius: 5px;
@@ -125,7 +180,7 @@ h1{
 
 /* SUBMIT AN ISSUE PAGE css */
 #submit-issue-desc-field {
-  height: 200px;
+  min-height: 200px;
 }
 
 
@@ -168,6 +223,58 @@ footer {
 footer p {
   margin-bottom: .25rem;
 }
+#map {
+  min-height: 575px;
+}
 
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 
+/* Registration Form Validation*/
+
+.alert-danger{
+  border: 1px black;
+  padding: 5px 5px;
+  color: #AB0000;
+  background-color: rgba(255, 255, 255, 0.6);
+  -webkit-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+}
+
+.checkbox{
+  color: white;
+}
+
+/* Submit Page Styling*/
+
+.form-group{
+  color: white;
+}
+
+.form-container{
+  color: white;
+  border: 1px black;
+  padding: 30px 40px;
+  margin-top: 10vh;
+  -webkit-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+}
+
+.bg{
+  width: 100%;
+  height: 100vh;
+}
+
+/*Index Page Styling*/
+
+.col{
+  align-content: center;
+  border: 1px black;
+  padding: 20px 40px;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  -webkit-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+}
