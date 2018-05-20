@@ -153,6 +153,16 @@ h1{
 
 /* Search Result CSS */
 
+.search-bar {
+  padding: 0px;
+}
+
+.search-bar-item {
+  height: 45px;
+  width: 100%;
+  padding: 10px;
+}
+
 .home-search-result {
   background-color: #b9d1f7;
   box-shadow: 1px 1px 1px #484f5b;

@@ -23,7 +23,7 @@
     <form action="/search_results" method="get" class="text-center">
       <div class="row">
 
-        <div class="col-md-3 search-bar">
+        <div class="col-sm-4 col-md-4 search-bar">
           <select class="search-bar-item" id="issue-category-select" name="issue_category">
             <% if(category.length){ %>
               <option value="" selected>Select category</option>
@@ -39,10 +39,10 @@
           </select>
         </div>
 
-        <div class="col-md-6 search-bar">
+        <div class="col-sm-5 col-md-5 search-bar">
           <input class="search-bar-item" id="title" type="text" name="zip_code" placeholder="Enter Zipcode" class="col-md-8">
         </div>
-        <div class="col-md-3 search-bar">
+        <div class="col-sm-3 col-md-3 search-bar">
           <button class="search-bar-item" id="submit-button" type="submit">Search</button>
         </div>
 
