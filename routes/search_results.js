@@ -6,6 +6,7 @@ router.get('/', function (req, res, next) {
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
+        var user_name = req.user[0].user_id;
     }
 
     var zip_code = req.query.zip_code;
@@ -21,7 +22,7 @@ router.get('/', function (req, res, next) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1], isLogged: isLoggedIn});
+            res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1], isLogged: isLoggedIn, user_name: user_name});
             //console.log(rows)
         });
     });

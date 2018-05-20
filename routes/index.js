@@ -36,6 +36,7 @@ router.get('/', function (req, res) {
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
+        var user_name = req.user[0].user_id;
     }
 
     req.getConnection(function(err, connection) {
@@ -46,7 +47,7 @@ router.get('/', function (req, res) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('index', {title: 'Team 04', data: rows[0], category:rows[1], isLogged:isLoggedIn});
+            res.render('index', {title: 'Team 04', data: rows[0], category:rows[1], isLogged:isLoggedIn, user_name: user_name});
             //console.log(rows)
         });
     });
@@ -57,8 +58,9 @@ router.get('/about', function (req, res){
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
+        var user_name = req.user[0].user_id;
     }
-    res.render('about', {title: 'Team 04', isLogged:isLoggedIn});
+    res.render('about', {title: 'Team 04', isLogged:isLoggedIn, user_name:user_name});
 
 });
 
@@ -66,6 +68,7 @@ router.get('/issue/view/:id', function (req, res, next) {
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
+        var user_name = req.user[0].user_id;
     }
     var id = req.params.id;
 
@@ -78,7 +81,7 @@ router.get('/issue/view/:id', function (req, res, next) {
 
             var formatted_date = moment.tz(rows[0].date, 'America/Los_Angeles').format('MMMM Do YYYY, h:mm a').toString();
             //console.log(formatted_date);
-            res.render('display_issue', {page_title: "View Result", data: rows, isLogged:isLoggedIn, date: formatted_date});
+            res.render('display_issue', {page_title: "View Result", user_name: user_name, data: rows, isLogged:isLoggedIn, date: formatted_date});
 
 
         });
@@ -91,6 +94,7 @@ router.get('/submit', function (req, res, next){
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
+        var user_name = req.user[0].user_id;
     }
     req.getConnection(function (err, connection) {
 
@@ -100,7 +104,7 @@ router.get('/submit', function (req, res, next){
                 console.log("Error Selecting : %s ", err);
 
             max = rows[0][0].id;
-            res.render('submit', {page_title: "Submit", category:rows[1], isLogged:isLoggedIn});
+            res.render('submit', {page_title: "Submit", category:rows[1], isLogged:isLoggedIn, user_name: user_name});
 
         });
 

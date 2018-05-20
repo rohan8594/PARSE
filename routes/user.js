@@ -16,6 +16,7 @@ router.get('/my_account', function(req, res){
 
     if (req.isAuthenticated()){
         isLoggedIn = true;
+        var user_name = req.user[0].user_id;
         if (req.user[0].isAdmin === 1)
         {
             isAnAdmin = true;
@@ -29,7 +30,7 @@ router.get('/my_account', function(req, res){
             if(err)
                 console.log("Error Selecting : %s ",err );
             
-            res.render('my_account', {message: req.flash('loginMessage'), title: 'Team 04', data: rows[0], category:rows[1], isLogged:isLoggedIn, isAdmin: isAnAdmin});
+            res.render('my_account', {message: req.flash('loginMessage'), title: 'Team 04', data: rows[0], category:rows[1], isLogged:isLoggedIn, isAdmin: isAnAdmin, user_name: user_name});
             //console.log(rows)
         });
     });
@@ -37,7 +38,6 @@ router.get('/my_account', function(req, res){
         res.redirect('/user/login');
     }
 });
-
 
 /**
  * update_status POST method
@@ -57,7 +57,6 @@ router.post('/update_status', function(req, res){
     });
 });
 
-
 /**
  * login GET method
  * Displays login page along with any errors returned during form validation.
@@ -66,12 +65,12 @@ router.get('/login', function(req, res) {
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
+        var user_name = req.user[0].user_id;
         res.redirect('/user/my_account');
     } else {
-        res.render('login', {message: req.flash('loginMessage'), isLogged:isLoggedIn});
+        res.render('login', {message: req.flash('loginMessage'), isLogged:isLoggedIn, user_name: user_name});
     }
 });
-
 
 /**
  * login POST method
@@ -112,9 +111,10 @@ router.get('/register', function (req, res, next) {
     var isLoggedIn = false;
     if (req.isAuthenticated()){
         isLoggedIn = true;
+        var user_name = req.user[0].user_id;
         res.redirect('/my_account');
     } else {
-        res.render('register', {message: req.flash('loginMessage'), isLogged:isLoggedIn});
+        res.render('register', {message: req.flash('loginMessage'), isLogged:isLoggedIn, user_name: user_name});
     }});
 
 /**
