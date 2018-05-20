@@ -5,51 +5,55 @@
 	  	 if(data[i].status=='1') { %>
 
 		  	<div class="row issue-listing completed">
+		  		<div class="col-md-2">
+		  			<a href="../issue/view/<%=data[i].id%>" target="_blank">
+		  			    <img src=<%=data[i].thumbnail%> class="thumbnail-image" />
+		  			</a>
+		  		</div>
+		  		
 		  		<div class="col-md-3">
-		  			<%= data[i].title %>
+		  			<span class="issue-title"><strong><%=data[i].title%></strong></h3>
+		  			<p class="issue-address"><%=data[i].address%></p>
 		  		</div>
 
-		  		<div class="col-md-3">
-		  			<%= data[i].description %>
+		  		<div class="col-md-5">
+		  			<span class="issue-description>"><%= data[i].description %></span>
 		  		</div>
 		  				
-		  		<div class="col-md-3" >
+		  		<div class="col-md-2" >
 		  			<form class="issue-list-item">
-		  				<input class="form-control hidden" type="hidden" value=<%=data[i].id%> name="id" />
+		  				<input class="form-control hidden" type="hidden" value="<%=data[i].id%>" name="id" />
 		  				<input class="form-control hidden" type="hidden" name="status" value="2" />
-		  				<button type="button" class="issue-button">Update Status</button>
-
+		  				<button type="button" class="issue-button">Set to Pending</button>
 		  			</form>
 		  		</div>
-
-		  		<div class="col-md-3">
-		  			<span class="update-flag"></span>
-		  		</div>
-
 		  	</div>
 
 	  	<% } %>
 
 	  	<% if(data[i].status=='2') { %>
 		  	<div class="row issue-listing pending">
+		  		<div class="col-md-2">
+		  			<a href="../issue/view/<%=data[i].id%>" target="_blank">
+		  			    <img src=<%=data[i].thumbnail%> class="thumbnail-image" />
+		  			</a>
+		  		</div>
+		  		
 		  		<div class="col-md-3">
-		  			<%= data[i].title %>
+		  			<span class="issue-listing-title"><strong><%=data[i].title%></strong></h3>
+		  			<p class="issue-address"><%=data[i].address%></p>
 		  		</div>
 
-		  		<div class="col-md-3 pending">
-		  			<%= data[i].description %>
+		  		<div class="col-md-5">
+		  			<span class="issue-description>"><%= data[i].description %></span>
 		  		</div>
 		  				
-		  		<div class="col-md-3" >
+		  		<div class="col-md-2" >
 		  			<form class="issue-list-item">
 		  				<input class="form-control hidden" type="hidden" value="<%=data[i].id%>" name="id" />
 		  				<input class="form-control hidden" type="hidden" name="status" value="1" />
-		  				<button type="button" class="issue-button">Update Status</button>
+		  				<button type="button" class="issue-button">Set to Complete</button>
 		  			</form>
-		  		</div>
-
-		  		<div class="col-md-3">
-		  			<span class="update-flag"></span>
 		  		</div>
 		  	</div>
 

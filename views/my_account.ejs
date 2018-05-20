@@ -41,15 +41,11 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12 filter-button" id="pending-filter-button">
-                        <h2 class="filter-title">Pending</h2>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 filter-button" id="completed-filter-button">
-                        <h2 class="filter-title">Completed</h2>
-                    </div>
+                    <select id="filter-dropdown">
+                        <option value="2">Pending</option>
+                        <option value="1">Complete</option>
+                        <option>All</option>
+                    </select>
                 </div>
 
 
@@ -61,6 +57,7 @@
 
                 <h1 id="pending-issue-title">Pending Issues</h1>
                 <h1 id="completed-issue-title">Completed Issues</h1>
+                <h1 id="all-issue-title">All Issues</h1>
                 <% include templates/account_issues.ejs %>
 
             </div>
@@ -96,21 +93,32 @@
             // Filter code ---------------------------------------
             $(".completed").hide();
             $(".pending").show();
+            $("#pending-issue-title").show();
             $("#completed-issue-title").hide();
+            $("#all-issue-title").hide();
 
 
-            $("#pending-filter-button").on("click", function(e) {
-                $(".completed").hide();
-                $(".pending").show();
-                $("#completed-issue-title").hide();
-                $("#pending-issue-title").show();
-            });
+            $("#filter-dropdown").on("change", function(e) {
+                if ($(this).val() === "1") {
+                    $(".completed").show();
+                    $(".pending").hide();
+                    $("#completed-issue-title").show();
+                    $("#pending-issue-title").hide();
+                    $("#all-issue-title").hide();
+                } else if ($(this).val() === "2") {
+                    $(".completed").hide();
+                    $(".pending").show();
+                    $("#all-issue-title").hide();
+                    $("#completed-issue-title").hide();
+                    $("#pending-issue-title").show();
+                } else {
+                    $(".completed").show();
+                    $(".pending").show();
+                    $("#all-issue-title").show();
+                    $("#completed-issue-title").hide();
+                    $("#pending-issue-title").hide();
 
-            $("#completed-filter-button").on("click", function(e) {
-                $(".completed").show();
-                $(".pending").hide();
-                $("#completed-issue-title").show();
-                $("#pending-issue-title").hide();
+                }
             });
 
 
@@ -120,6 +128,7 @@
             // This event will update the database with the new issue status.
             $(".issue-list-item").on("submit", function(e) {
                 e.preventDefault(); // Prevent the page from refreshing
+                var el = $(this).parent().parent();
 
                 // Ajax request will go here to update the database
                 var data = $(this).serialize();
@@ -128,30 +137,23 @@
                 $.ajax({
                     type: 'POST',
                     data: data,
-                    dataType: 'application/json',
                     url: '/user/update_status',
-                    success: function(data) {
-                        console.log('success');
-                        console.log(JSON.stringify(data));
+                    success: function() {
+                        var pending = "pending";
+                        var completed = "completed";
+
+                        if (el.hasClass(pending)) {
+                            el.removeClass(pending);
+                            el.addClass(completed);
+                            el.find(".issue-button").html("Set to Pending");
+                        } else if (el.hasClass(completed)) {
+                            el.removeClass(completed);
+                            el.addClass(pending);
+                            el.find(".issue-button").html("Set to Complete");
+                        }
+                        el.hide();
                     }
                 });
-
-                var pending = "pending";
-                var completed = "completed";
-
-                var el = $(this).parent().parent();
-                if (el.hasClass(pending)) {
-                    el.removeClass(pending);
-                    el.addClass(completed);
-                    //el.find(".issue-button").html("Set to Complete");
-                } else if (el.hasClass(completed)) {
-                    el.removeClass(completed);
-                    el.addClass(pending);
-                    //el.find(".issue-button").html("Set to Pending");
-                }
-                el.hide();
-
-
 
                 // Show the data so that we know it's working
                 /*
