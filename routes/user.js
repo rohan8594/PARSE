@@ -15,9 +15,8 @@ router.get('/my_account', function(req, res){
         {
             isAnAdmin = true;
         }
-    }
 
-    req.getConnection(function(err, connection) {
+        req.getConnection(function(err, connection) {
 
         var query = connection.query("SELECT issue.id, issue.status, issue.title, category.name, issue.thumbnail, " +
             "issue.description, issue.address, issue.zipcode FROM issue INNER JOIN category ON issue.category = category.id; " +
@@ -29,6 +28,9 @@ router.get('/my_account', function(req, res){
             //console.log(rows)
         });
     });
+    } else {
+        res.redirect('/user/login');
+    }
 });
 
 router.post('/update_status', function(req, res){
