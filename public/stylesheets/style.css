@@ -9,8 +9,7 @@ h3 {
 }
 
 .issue-image {
-  width: 75%;
-  height: 75%;
+  width: 100%;
   border-radius: 25px;
 }
 
@@ -35,8 +34,16 @@ h3 {
 }
 
 .field-title {
-  color: black;
+  color: white;
   font-family: sans-serif;
+}
+
+
+/* NAVIGATION BAR CSS */
+#navbar-logo {
+  position: relative;
+  top: -11px;
+  height: 42px;
 }
 
 
@@ -48,6 +55,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .title {
@@ -77,13 +85,35 @@ body {
 /*listing title*/
 h1{
   font-family: sans-serif;
+  color: white;
+  text-align: center;
 }
 
 /*details pane*/
-.pane {
-  /*border-style: solid;*/
-  background-color: rgba(0, 0, 0, 0.5);
+
+.issue-info {
+  width:100%;
   border-radius: 20px;
+  /* height: 450px; */
+}
+
+p {
+  font-family: sans-serif;
+}
+
+.descript {
+  font-family: sans-serif;
+  color: white;
+}
+
+.pane {
+  padding: 5%;
+  height: 450px;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  border-radius: 20px;
+}
+table {
+  background-color: white;
 }
 
 /* --------------------------- DASHBOARD PAGE ------------------------------ */
@@ -155,6 +185,10 @@ h1{
 
 /* Search Result CSS */
 
+.navbar-search-box {
+  min-width: 230px;
+}
+
 #submit-button {
   top: 0px;
 }
@@ -205,6 +239,15 @@ h1{
   margin: 0 auto;
   display: block;
   padding: 10px;
+}
+
+.jumbo-banner-box{
+  background-color: black;
+  opacity: 0.7;
+  -webkit-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  box-shadow: 5px 6px 22px 5px rgba(0,0,0,0.75);
+
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -270,7 +313,7 @@ footer p {
   margin-bottom: .25rem;
 }
 #map {
-  min-height: 575px;
+  /* min-height: 575px; */
 }
 
 .box-shadow {
@@ -322,9 +365,41 @@ footer p {
   align-content: center;
   border: 1px black;
   padding: 0px 40px 30px 40px;
-  margin-top: 10vh;
+  margin-top: 5vh;
   margin-bottom: 10vh;
   -webkit-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
   box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+}
+
+
+/* FOOTER styling */
+.page-footer {
+  margin-top: 30px;
+  opacity: .80;
+  background-color: black
+}
+
+.page-footer p, h4 {
+  color: white;
+}
+
+.footer-logo {
+  display: block;
+  margin: auto;
+  height: 60px;
+}
+
+
+/* BANNER styling */
+.project-banner {
+  width: 100%;
+  background-color: yellow;
+  opacity: 0.80;
+  text-align: center;
+}
+
+.project-banner span {
+  color: black;
+  font-size: 20px;
 }

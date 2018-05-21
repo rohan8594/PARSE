@@ -1,15 +1,21 @@
 <nav class="navbar navbar-inverse">
+
+  <!-- Banner to show that this is a school project -->
+  <% include project_banner.ejs %>
+
   <div class="container">
 
     <!-- QUICK LINKS -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">PARSE</a>
+      <a class="navbar-brand" href="/"><img id="navbar-logo" src="/images/logos/logo-small.png"</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class=""><a href="/submit">Submit an Issue</a></li>
-      <li><a href="/about">About Us</a></li>
+      <li id="submit-navbar-item"><a href="/submit">Submit an Issue</a></li>
+      <li id="about-navbar-item"><a href="/about">About Us</a></li>
     </ul>
-    <div class="col-sm-3 col-md-3">
+
+    <!-- Search by zipcode box -->
+    <div class="col-sm-3 col-md-3 navbar-search-box">
 
         <div class="col-md-12">
 
@@ -29,13 +35,15 @@
 
         </div>
 		</div>
-    <ul class="nav navbar-nav navbar-right">
+
+    <ul class="
+    nav navbar-nav navbar-right">
       <% if (!locals.isLogged) { %>
-        <li><a href="/user/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li id="sign-up-navbar-item"><a href="/user/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li id="login-navbar-item"><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       <% } else { %>
-        <li><a href="/user/my_account">dashboard</a></li>
-        <li><a href="/user/logout">logout</a></li>
+        <li id="dashboard-navbar-item"><a href="/user/my_account"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+        <li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span>logout</a></li>
         <li><a href="#" style="pointer-events: none; cursor: default;"><span class="glyphicon glyphicon-user"></span> <%=user_name%></a></li>
       <% } %>
     </ul>

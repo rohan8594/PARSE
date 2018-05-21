@@ -8,6 +8,14 @@
 
 
 	<% include templates/stylesheet-refs.ejs %>
+
+
+	<style>
+		.page-footer {
+			margin-top: 100px;
+		}
+	</style>
+
     <% include templates/google-analytics.ejs %>
 </head>
 
@@ -50,7 +58,20 @@
 	  </div>
 	</div>
 
+	<!-- FOOTER code -->
+	<% include templates/footer.ejs %>
+
 
 	<% include templates/javascript-refs.ejs %>
+
+
+	<script type="text/javascript">
+
+	  $(function() {
+	    $("#login-navbar-item").addClass("active");
+	  });
+
+	</script>
+
 </body>
 </html>

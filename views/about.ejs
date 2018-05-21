@@ -30,7 +30,7 @@
 
     <main role="main">
 
-      <section class="jumbotron text-center">
+      <section class="row jumbo-banner-box text-center">
         <div class="container">
           <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
           <p class="lead text-muted">Meet the Team</p>
@@ -253,22 +253,22 @@
 
     </main>
 
-    <footer class="text-muted">
-      <div class="container">
-        <!-- Default bootstrap footer
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-      -->
-      </div>
-    </footer>
+    <!-- FOOTER code -->
+    <% include templates/footer.ejs %>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- Script references -->
     <% include templates/javascript-refs.ejs %>
+
+
+    <script type="text/javascript">
+
+      $(function() {
+        $("#about-navbar-item").addClass("active");
+      });
+
+    </script>
   </body>
 </html>

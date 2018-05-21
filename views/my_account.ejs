@@ -79,6 +79,10 @@
 
     </div>
 
+    <!-- FOOTER code -->
+    <% include templates/footer.ejs %>
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -169,8 +173,12 @@
                 $(this).parent().submit(); // The parent form
             });
 
+            $("#dashboard-navbar-item").addClass("active");
+
         });
     </script>
+
+
 
 </body>
 </html>
