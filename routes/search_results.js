@@ -1,3 +1,11 @@
+/**
+ * This file contains middleware that handles GET requests to the search results page.
+ * Essentially, this file handles the search functionality. A basic SQL % like query is
+ * used to implement the search.
+ *
+ * @author Rohan Patel, Dion Lagos
+ */
+
 var express = require('express');
 var router = express.Router();
 
@@ -22,8 +30,19 @@ router.get('/', function (req, res, next) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1], isLogged: isLoggedIn, user_name: user_name});
-            //console.log(rows)
+            if(!rows[0].length){ // if search query returns no issues, we display the most recent issues instead of displaying an empty view
+                var query = connection.query("SELECT * FROM issue INNER JOIN category ON issue.category = category.id " +
+                    "WHERE issue.status != 1 order by date desc; SELECT name FROM category", [1,2], function (err,rows) {
+                    if(err)
+                        console.log("Error Selecting : %s ",err );
+
+                    res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1], isLogged: isLoggedIn, user_name: user_name});
+                })
+            }
+            else {
+                res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1], isLogged: isLoggedIn, user_name: user_name});
+                //console.log(rows)
+            }
         });
     });
 
