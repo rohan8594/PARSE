@@ -1,3 +1,7 @@
+/**
+ * @author Rohan Patel, Dion Lagos
+ */
+
 var express = require('express');
 var session  = require('express-session');
 var path = require('path');
@@ -31,19 +35,15 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
-
 app.use(
-
     connection(mysql,{
-
+        //db config
         host: "us-cdbr-iron-east-05.cleardb.net",
         user: "b3220b75dccc0a",
         password: "ddd8323b",
         database: "heroku_d6fcf8fd2312a32",
         multipleStatements: true
-
     },'pool') //or single
-
 );
 
 // view engine setup
@@ -59,14 +59,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
 
-
 app.use('/', index);
 app.use('/about', about);
 app.use('/search_results', search_results);
 app.use('/user', user);
 app.use('*/images',express.static('public/images'));
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -85,6 +82,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
