@@ -238,7 +238,7 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
                 req.getConnection(function (err, connection) {
 
                     var query = connection.query(
-                        "INSERT INTO user (user_id, name, password) VALUES ('" + user_id + "','" + name + "','" + pwd + "'); INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id) VALUES (" + max + ",'" + title + "','"
+                        "INSERT INTO user (user_id, name, password) VALUES ('" + user_id + "','" + name + "','" + pwd + "'); INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id, date) VALUES (" + max + ",'" + title + "','"
                         + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
                         + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + username + "','" + formatted_date + "');", [1,2], function (err, rows) {
                             if (err)
