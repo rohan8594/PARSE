@@ -1,7 +1,14 @@
+ <!--
+	TEMPLATE: account_issues.ejs
+	This template iterates through all of the issues passed into the front end and lists them on the dashboard page.
+ -->
+
+
   <% if(data.length) { %>
 
 	 <% for(var i = 0;i < data.length;i++) {
 
+	 	<!-- COMPLETED ISSUES -->
 	  	 if(data[i].status=='3') { %>
 
 		  	<div class="row issue-listing completed">
@@ -31,6 +38,7 @@
 
 	  	<% } %>
 
+	  	<!-- PENDING ISSUES -->
 	  	<% if(data[i].status=='2') { %>
 		  	<div class="row issue-listing pending">
 		  		<div class="col-md-2">
@@ -63,8 +71,6 @@
 
   <% } else { %>
 
-
-  No issues to display.
-
+  <h1>No issues to display</h1>
 
   <% } %>

@@ -1,3 +1,9 @@
+<!-- 
+    VIEW: my_account.ejs
+    This is the city manager's dashboard page.
+    They can update the status of Pending and Completed issues from here.
+ -->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -65,15 +71,15 @@
 
         </div>
         <%} else { %>
-        <section class="jumbotron text-center">
-        <div class="container">
-            <h1>Welcome, </h1>
-            <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
+        <!-- The message that appears when the user is not authorized to perform city manager roles. -->
+        <section class="row jumbo-banner-box text-center">
+          <div class="container">
+            <h1 class="jumbotron-heading">Welcome to PARSE!</h1>
             <p class="lead text-muted">
-                Environmental Reporting Tool<br>
-                This website is the term project for CSC648/848's Team 04.
+                This is PARSE, (Pollution and Accident Reporting for a Safer Environment), your environmental reporting tool for your home and planet.<br>
+                <a href="/">Click here</a> to go back to the homepage.
             </p>
-        </div>
+          </div>
         </section>
         <% } %>
 
@@ -90,6 +96,9 @@
     <!-- Script references -->
     <% include templates/javascript-refs.ejs %>
 
+    <!--
+        This script controls the appearance of the different issues and allows the user to filter and update the lists dynamically.
+    -->
     <script type="text/javascript">
 
         $(function() {
@@ -168,11 +177,12 @@
 
             });
 
-            // It causes the form to submit
+            // causes the form to submit
             $(".issue-button").on("click", function(e) {
                 $(this).parent().submit(); // The parent form
             });
 
+            // Makes the current page appear active in the navbar
             $("#dashboard-navbar-item").addClass("active");
 
         });
