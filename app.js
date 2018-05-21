@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
+var favicon = require('serve-favicon');
 
 require('./config/passport')(passport); // pass passport for configuration
 
