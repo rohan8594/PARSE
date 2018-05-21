@@ -88,13 +88,13 @@ router.get('/issue/view/:id', function (req, res, next) {
 
     req.getConnection(function (err, connection) {
 
-        var query = connection.query('SELECT * FROM issue JOIN user ON issue.user_id = user.user_id, status WHERE issue.status = status.id AND issue.id = ?', [id], function (err, rows) {
+        var query = connection.query('SELECT *, category.name as category_name FROM issue JOIN user ON issue.user_id = user.user_id, status, category WHERE issue.status = status.id AND issue.category = category.id AND issue.id = ?', [id], function (err, rows) {
 
             if (err)
                 console.log("Error Selecting : %s ", err);
 
             var formatted_date = moment.tz(rows[0].date, 'America/Los_Angeles').format('MMMM Do YYYY, h:mm a').toString();
-            //console.log(formatted_date);
+            console.log(formatted_date);
             res.render('display_issue', {page_title: "View Result", user_name: user_name, data: rows, isLogged:isLoggedIn, date: formatted_date});
 
 
