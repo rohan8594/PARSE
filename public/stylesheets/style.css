@@ -39,6 +39,14 @@ h3 {
 }
 
 
+/* NAVIGATION BAR CSS */
+#navbar-logo {
+  position: relative;
+  top: -11px;
+  height: 42px;
+}
+
+
 /* Code for the general layout */
 body {
   background-image: url(images/design_images/sanfranfrontpage.jpg);
@@ -374,6 +382,12 @@ footer p {
 
 .page-footer p, h4 {
   color: white;
+}
+
+.footer-logo {
+  display: block;
+  margin: auto;
+  height: 40px;
 }
 
 
