@@ -1,3 +1,8 @@
+<!--
+    VIEW: index.ejs
+    Landing page for the entire website. Introduces new users to the functionality and purpose of our website.
+-->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -36,7 +41,11 @@
     <div class="container">
         <!-- begin container -->
         <% include templates/search_bar_template.ejs %>
+
+        <!-- Showing # out of # snippet -->
         <p style="color: white">Showing <b><%=data.length%></b> out of <b><%=data.length%></b> results</p>
+
+        <!-- results of the most recent query -->
         <% include templates/results.ejs %>
 
             <!-- End container -->
