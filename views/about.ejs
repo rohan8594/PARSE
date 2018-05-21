@@ -30,7 +30,8 @@
 
     <main role="main">
 
-      <section class="jumbotron text-center">
+      <!-- Jumbotron title -->
+      <section class="row jumbo-banner-box text-center">
         <div class="container">
           <h1 class="jumbotron-heading">CSC 648 - Team 4</h1>
           <p class="lead text-muted">Meet the Team</p>
@@ -39,6 +40,7 @@
 
       <div class="container">
 
+        <!-- Rodrigo's about block -->
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
@@ -49,13 +51,13 @@
                 </div>
                 <div class="col-sm-9">
                   <h3>Rodrigo
-                    <a class="link" href="#">
+                    <a class="link" href="https://github.com/rodrigobell">
                       <img class="social-icon" src="http://bogas04.github.io/img/github.svg"/>
                     </a>
-                    <a class="link" href="#">
+                    <a class="link" href="https://www.linkedin.com/in/rodrigobell/">
                       <img class="social-icon" src="http://www.iconninja.com/files/331/775/772/linkedin-website-logo-service-social-web-communication-icon.svg" />
                     </a>
-                    <a class="link" href="#" target="_top">
+                    <a class="link" href="mailto:rbell594@gmail.com" target="_top">
                       <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" />
                     </a></h3>
                   <p>
@@ -67,6 +69,7 @@
           </div>
         </div>
 
+        <!-- Charlie's about block -->
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
@@ -100,6 +103,7 @@
           </div>
         </div>
 
+        <!-- Rohan's about block -->
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
@@ -129,6 +133,7 @@
           </div>
         </div>
 
+        <!-- Kam's about block -->
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
@@ -159,6 +164,7 @@
           </div>
         </div>
 
+        <!-- Zhenru's about block -->
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
@@ -189,6 +195,7 @@
           </div>
         </div>
 
+        <!-- Dion's about block -->
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
@@ -219,6 +226,7 @@
           </div>
         </div>
 
+        <!-- Michael's about block -->
         <div class="row">
           <div class="col-md-2"></div>
           <div class="col-md-8">
@@ -253,22 +261,23 @@
 
     </main>
 
-    <footer class="text-muted">
-      <div class="container">
-        <!-- Default bootstrap footer
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
-        <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-      -->
-      </div>
-    </footer>
+    <!-- FOOTER code -->
+    <% include templates/footer.ejs %>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- Script references -->
     <% include templates/javascript-refs.ejs %>
+
+
+    <!-- Makes the current page appear active in the navbar -->
+    <script type="text/javascript">
+
+      $(function() {
+        $("#about-navbar-item").addClass("active");
+      });
+
+    </script>
   </body>
 </html>

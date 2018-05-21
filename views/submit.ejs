@@ -1,3 +1,9 @@
+<!--
+    VIEW: submit.ejs
+    Users can submit an issue from this page.
+    Provides the step to sign up for an account if the user is not already logged in.
+-->
+
 <!doctype html>
 <html lang="en">
 
@@ -10,11 +16,15 @@
 
     <title>Submit</title>
 
-    <!-- Custom styles for this template -->
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-
     <!-- Stylesheets -->
     <% include templates/stylesheet-refs.ejs %>
+
+    <style>
+        .page-footer {
+            margin-top: 600px;
+        }
+    </style>
+
 
     <!-- Google Analytics snippet -->
     <% include templates/google-analytics.ejs %>
@@ -33,8 +43,8 @@
 
     <div class="container-fluid bg">
         <!-- begin container -->
-        <div class="col-md-4 col-sm-4 col-xs-12"></div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-sm-3 col-xs-12"></div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
 
             <!--Form Validation-->
             <% if(locals.errors){
@@ -43,6 +53,8 @@
             <%}}%>
 
             <form class="form-container" method="post" enctype="multipart/form-data" action="/post_issue">
+
+                <h1>Submit Issue</h1>
 
                 <div class="form-group">
                     <label>Title</label>
@@ -112,22 +124,14 @@
 
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
+            <br/>
         </div>
         <!-- End container -->
     </div>
 </main>
 
-<footer class="text-muted">
-    <div class="container">
-        <!-- Default Bootstrap Footer
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-      <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-      <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-  -->
-    </div>
-</footer>
+<!-- FOOTER code -->
+<% include templates/footer.ejs %>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -155,6 +159,16 @@
     }
 </script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABYQ3l89zm1uFz95T1gJQFEbwKAkzMV3Q&libraries=places&callback=activatePlacesSearch"></script>
+
+
+<!-- Makes the current page appear active in the navbar -->
+<script type="text/javascript">
+
+  $(function() {
+    $("#submit-navbar-item").addClass("active");
+  });
+
+</script>
 
 </body>
 </html>

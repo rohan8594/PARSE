@@ -1,29 +1,25 @@
-<!-- search bar template -->
-
 <!--
-   <div class= "row">
-    <div class= "col-md-6 offset-md-3">
-    <form>
-     <div class="input-group">
-     <input type="text" class="form-control" placeholder="Search" name="search">
-      <div class="input-group-btn">
-      <button class="btn btn-default" type="submit">
-      <i class="glyphicon glyphicon-search"></i></button>
-      </div>
-     </div>
-    </form>
-   </div>
-   </div>
-
+  TEMPLATE: search_bar_template.ejs
+  This is the search bar that appears below the navigation bar in the index.ejs and search_results.ejs pages.
 -->
+
 
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col col-md-8">
-    <form action="/search_results" method="get" class="text-center">
+
+    <!-- Form Validation - where the message appears -->
+    <div class="row text-center validation-message-box">
+      <span class="validation-message text-center" id="search-bar-validation-message"></span>
+    </div>
+
+
+    <!-- Search form -->
+    <form class="search-form" action="/search_results" method="get" class="text-center">
       <div class="row">
 
-        <div class="col-md-3 search-bar">
+        <!-- Category dropdown menu -->
+        <div class="col-sm-4 col-md-4 search-bar">
           <select class="search-bar-item" id="issue-category-select" name="issue_category">
             <% if(category.length){ %>
               <option value="" selected>Select category</option>
@@ -39,11 +35,14 @@
           </select>
         </div>
 
-        <div class="col-md-6 search-bar">
-          <input class="search-bar-item" id="title" type="text" name="zip_code" placeholder="Enter Zipcode" class="col-md-8">
+        <!-- Zipcode input -->
+        <div class="col-sm-6 col-md-6 search-bar">
+          <input class="search-bar-item zipcode" type="number" name="zip_code" placeholder="Enter Zipcode" class="col-md-8">
         </div>
-        <div class="col-md-3 search-bar">
-          <button class="search-bar-item" id="submit-button" type="submit">Search</button>
+
+        <!-- Submit button -->
+        <div class="col-sm-2 col-md-2 search-bar">
+          <button class="glyphicon glyphicon-search search-bar-item" id="submit-button" type="submit"></button>
         </div>
 
 

@@ -9,8 +9,7 @@ h3 {
 }
 
 .issue-image {
-  width: 75%;
-  height: 75%;
+  width: 100%;
   border-radius: 25px;
 }
 
@@ -35,8 +34,16 @@ h3 {
 }
 
 .field-title {
-  color: black;
+  color: white;
   font-family: sans-serif;
+}
+
+
+/* NAVIGATION BAR CSS */
+#navbar-logo {
+  position: relative;
+  top: -11px;
+  height: 42px;
 }
 
 
@@ -48,6 +55,12 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-attachment: fixed;
+}
+
+.title {
+  color: white;
+  text-align: center;
 }
 
 .container {
@@ -57,6 +70,8 @@ body {
 
 /* Results display code */
 .thumbnail-image {
+  margin: 0 auto;
+  display: block;
   height: 80px;
   width: 80px;
   border-radius: 10%;
@@ -70,13 +85,35 @@ body {
 /*listing title*/
 h1{
   font-family: sans-serif;
+  color: white;
+  text-align: center;
 }
 
 /*details pane*/
-.pane {
-  /*border-style: solid;*/
-  background-color: rgba(0, 0, 0, 0.5);
+
+.issue-info {
+  width:100%;
   border-radius: 20px;
+  /* height: 450px; */
+}
+
+p {
+  font-family: sans-serif;
+}
+
+.descript {
+  font-family: sans-serif;
+  color: white;
+}
+
+.pane {
+  padding: 5%;
+  height: 450px;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  border-radius: 20px;
+}
+table {
+  background-color: white;
 }
 
 /* --------------------------- DASHBOARD PAGE ------------------------------ */
@@ -85,7 +122,6 @@ h1{
 }
 
 #dashboard-filter {
-  min-height: 500px;
   padding: 20px;
 }
 
@@ -120,6 +156,8 @@ h1{
   padding: 20px;
   opacity: 0.85;
   border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 5px black;
+  -moz-box-shadow: 5px 5px 5px black;
   box-shadow: 5px 5px 5px black;
 }
 
@@ -147,8 +185,28 @@ h1{
 
 /* Search Result CSS */
 
+.navbar-search-box {
+  min-width: 230px;
+}
+
+#submit-button {
+  top: 0px;
+}
+
+.search-bar {
+  padding: 0px;
+}
+
+.search-bar-item {
+  height: 45px;
+  width: 100%;
+  padding: 10px;
+}
+
 .home-search-result {
   background-color: #b9d1f7;
+  -webkit-box-shadow: 1px 1px 1px #484f5b;
+  -moz-box-shadow: 1px 1px 1px #484f5b;
   box-shadow: 1px 1px 1px #484f5b;
   border-radius: 5px;
   padding: 10px;
@@ -175,6 +233,37 @@ h1{
 
 #search-result-zipcode {
 
+}
+
+.issue-button {
+  margin: 0 auto;
+  display: block;
+  padding: 10px;
+}
+
+.jumbo-banner-box{
+  background-color: black;
+  opacity: 0.7;
+  -webkit-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+  box-shadow: 5px 6px 22px 5px rgba(0,0,0,0.75);
+
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* FORM VALIDATION */
+
+.validation-message-box {
+  height: 30px;
+}
+
+.validation-message {
+  color: red;
 }
 
 
@@ -224,10 +313,14 @@ footer p {
   margin-bottom: .25rem;
 }
 #map {
-  min-height: 575px;
+  /* min-height: 575px; */
 }
 
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.box-shadow {
+  -webkit-box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  -moz-box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
 
 /* Registration Form Validation*/
 
@@ -271,10 +364,42 @@ footer p {
 .col{
   align-content: center;
   border: 1px black;
-  padding: 20px 40px;
-  margin-top: 10vh;
+  padding: 0px 40px 30px 40px;
+  margin-top: 5vh;
   margin-bottom: 10vh;
   -webkit-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
   box-shadow: 0px 6px 22px 5px rgba(0,0,0,0.75);
+}
+
+
+/* FOOTER styling */
+.page-footer {
+  margin-top: 30px;
+  opacity: .80;
+  background-color: black
+}
+
+.page-footer p, h4 {
+  color: white;
+}
+
+.footer-logo {
+  display: block;
+  margin: auto;
+  height: 60px;
+}
+
+
+/* BANNER styling */
+.project-banner {
+  width: 100%;
+  background-color: yellow;
+  opacity: 0.80;
+  text-align: center;
+}
+
+.project-banner span {
+  color: black;
+  font-size: 20px;
 }

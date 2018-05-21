@@ -1,4 +1,8 @@
-<!-- register.ejs -->
+<!--
+	VIEW: register.ejs
+	This the registration page to create a new account.
+-->
+
 <!doctype html>
 <html>
 <head>
@@ -20,8 +24,8 @@
 
 	<div class="container-fluid bg">
 	  <div class="row">
-	  	<div class="col-md-4 col-sm-4 col-xs-12"></div>
-	  	<div class="col-md-4 col-sm-4 col-xs-12">
+	  	<div class="col-md-4 col-sm-3 col-xs-12"></div>
+	  	<div class="col-md-4 col-sm-6 col-xs-12">
 
 				<form class="form-container" method="post" action="/user/signup">
 				  <h1>PARSE Registration</h1>
@@ -32,18 +36,27 @@
          			   <div class="alert alert-danger">*<%=errors[i].msg%> </div>
          			  <%}}%>
 
+         			  <!-- Name -->
 					<div class="form-group">
 						<input type="name" class="form-control" id="exampleName" placeholder="Name" name="Name">
 					</div>
+
+					<!-- The desired username -->
 					<div class="form-group">
 						<input type="username" class="form-control" id="exampleUName" placeholder="Username" name="username">
 					</div>
+
+					<!-- Password entry 1 -->
 					<div class="form-group">
 						<input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" name="password">
 					</div>
+
+					<!-- Password entry 2 -->
 					<div class="form-group">
 						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password" name="password2">
 					</div>
+
+					<!-- Remember me checkbox -->
 					<div class="checkbox">
 						<label>
 							<input type="checkbox"> Remember Me
@@ -56,6 +69,20 @@
 	  </div>
 	</div>
 
+	<!-- FOOTER code -->
+	<% include templates/footer.ejs %>
+
+
 	<% include templates/javascript-refs.ejs %>
+
+	<!-- Makes the current page appear active in the navbar -->
+	<script type="text/javascript">
+
+	  $(function() {
+	    $("#sign-up-navbar-item").addClass("active");
+	  });
+
+	</script>
+
 </body>
 </html>

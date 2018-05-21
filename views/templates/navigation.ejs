@@ -1,31 +1,57 @@
+
+<!--
+  TEMPLATE: navigation.ejs
+  The navigation bar for every page.
+-->
+
 <nav class="navbar navbar-inverse">
+
+  <!-- Banner to show that this is a school project -->
+  <% include project_banner.ejs %>
+
   <div class="container">
+
+    <!-- QUICK LINKS -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">PARSE</a>
+      <a class="navbar-brand" href="/"><img id="navbar-logo" src="/images/logos/logo-small.png"</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class=""><a href="/submit">Submit an Issue</a></li>
-      <li><a href="/about">About Us</a></li>
+      <li id="submit-navbar-item"><a href="/submit">Submit an Issue</a></li>
+      <li id="about-navbar-item"><a href="/about">About Us</a></li>
     </ul>
-    <div class="col-sm-3 col-md-3">
-  		<form class="navbar-form text-center" role="search" action="/search_results" method="get">
-    		<div class="input-group">
-    			<input type="text" class="form-control" placeholder="Enter Zipcode:" name="zip_code" id="srch-term">
-    			<div class="input-group-btn">
-    				<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-            <input type="hidden" name="issue_category" value=""/>
-    			</div>
-    		</div>
-  		</form>
+
+    <!-- Search by zipcode box -->
+    <div class="col-sm-3 col-md-3 navbar-search-box">
+
+        <div class="col-md-12">
+
+          <!-- SEARCH BY ZIPCODE FORM -->
+      		<form class="search-form navbar-form text-center" role="search" action="/search_results" method="get">
+        		<div class="input-group">
+        			<input type="number" class="form-control zipcode" placeholder="Enter Zipcode" name="zip_code" id="srch-term">
+        			<div class="input-group-btn">
+        				<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                <input type="hidden" name="issue_category" value=""/>
+        			</div>
+        		</div>
+      		</form>
+
+          <!-- SEARCH VALIDATION MESSAGE-->
+          <span class="validation-message text-center"></span>
+
+        </div>
 		</div>
-    <ul class="nav navbar-nav navbar-right">
+
+    <!-- items on the right side of the navbar -->
+    <ul class="
+    nav navbar-nav navbar-right">
       <% if (!locals.isLogged) { %>
-        <li><a href="/user/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li id="sign-up-navbar-item"><a href="/user/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li id="login-navbar-item"><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       <% } else { %>
-        <li><a href="/user/my_account">dashboard</a></li>
-        <li><a href="/user/logout">logout</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> <%=user_name%></a></li>
+        <li id="dashboard-navbar-item"><a href="/user/my_account"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+        <li><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> logout</a></li>
+        <li><a href="#" style="pointer-events: none; cursor: default;"><span class="glyphicon glyphicon-user"></span> <%=user_name%></a></li>
       <% } %>
     </ul>
   </div>
