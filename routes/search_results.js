@@ -22,8 +22,19 @@ router.get('/', function (req, res, next) {
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1], isLogged: isLoggedIn, user_name: user_name});
-            //console.log(rows)
+            if(!rows[0].length){
+                var query = connection.query("SELECT * FROM issue INNER JOIN category ON issue.category = category.id " +
+                    "WHERE issue.status != 1 order by date desc; SELECT name FROM category", [1,2], function (err,rows) {
+                    if(err)
+                        console.log("Error Selecting : %s ",err );
+
+                    res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1], isLogged: isLoggedIn, user_name: user_name});
+                })
+            }
+            else {
+                res.render('search_results', {title: 'Search Results', zcode: zip_code, data: rows[0], category:rows[1], isLogged: isLoggedIn, user_name: user_name});
+                //console.log(rows)
+            }
         });
     });
 
