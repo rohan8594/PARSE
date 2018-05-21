@@ -88,7 +88,7 @@ router.get('/issue/view/:id', function (req, res, next) {
 
     req.getConnection(function (err, connection) {
 
-        var query = connection.query('SELECT *, category.name as category_name FROM issue JOIN user ON issue.user_id = user.user_id, status, category WHERE issue.status = status.id AND issue.category = category.id AND issue.id = ?', [id], function (err, rows) {
+        var query = connection.query('SELECT *, category.name as category_name, user.name as user_name FROM issue JOIN user ON issue.user_id = user.user_id, status, category WHERE issue.status = status.id AND issue.category = category.id AND issue.id = ?', [id], function (err, rows) {
 
             if (err)
                 console.log("Error Selecting : %s ", err);
