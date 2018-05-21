@@ -136,7 +136,36 @@ router.get('/submit', function (req, res, next){
  * comes from node's moment module.
  */
 router.post('/post_issue', upload.single('issue_image'), function (req, res) {
+    if (typeof req.file === 'undefined') {
+        console.log("whoopsie! no image. ");
+        req.checkBody('issue_image', 'An image is required.').equals(typeof 'undefined');
+        var errorList = req.validationErrors();
+        if (errorList) {
+            var isLoggedIn = false;
+            if (req.isAuthenticated()) {
+                isLoggedIn = true;
+                var user_name = req.user[0].user_id;
+            }
+            req.getConnection(function (err, connection) {
 
+                var query = connection.query("SELECT max(id) as id FROM issue; SELECT name FROM category", [1, 2], function (err, rows) {
+
+                    if (err)
+                        console.log("Error Selecting : %s ", err);
+
+                    max = rows[0][0].id;
+                    res.render('submit', {
+                        page_title: "Submit",
+                        category: rows[1],
+                        isLogged: isLoggedIn,
+                        user_name: user_name,
+                        errors: errorList
+                    });
+                });
+            });
+        }
+        return;
+    }
     cloudinary.uploader.upload(req.file.path, function(result) {
         var image_name = result.public_id + '.' + result.format;
         var image_url = result.secure_url;
