@@ -158,6 +158,7 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
 
         req.checkBody('title', 'Title is required').notEmpty();
         req.checkBody('description', 'Description is required').notEmpty();
+        req.checkBody('address', 'Address is required').notEmpty();
         req.checkBody('zipcode', 'Zip Code is required.').notEmpty();
 
         /* CHECK IF USER IS LOGGED IN */
@@ -166,60 +167,98 @@ router.post('/post_issue', upload.single('issue_image'), function (req, res) {
             var name = req.body.Name;
             var password = req.body.password;
             var password2 = req.body.password2;
-            req.checkBody('username', 'Username is required').notEmpty();
-            req.checkBody('password', 'Password is required').notEmpty();
+            req.checkBody('Name', 'Name field cannot be empty').notEmpty();
+            req.checkBody('username', 'Username cannot be empty').notEmpty();
+            req.checkBody('password', 'Password cannot be empty').notEmpty();
+            req.checkBody('password', 'Password must be at least 8 characters long').len(8, 100);
+            req.checkBody('password2', 'Password must be at least 8 characters long').len(8, 100);
             req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
             var errorList = req.validationErrors();
 
-            if(errorList)
-                res.render('submit',{
-                    errors:errorList
-                });
-            max = max + 1;
+            if(errorList){
+                var isLoggedIn = false;
+                if (req.isAuthenticated()){
+                    isLoggedIn = true;
+                    var user_name = req.user[0].user_id;
+                }
+                req.getConnection(function (err, connection) {
 
-            var user_id = username;
-            var pwd = bcrypt.hashSync(password, bcrypt.genSaltSync(10)); //generate encrypted password
+                    var query = connection.query("SELECT max(id) as id FROM issue; SELECT name FROM category", [1,2], function (err, rows) {
 
-            //console.log(user_id);
-            //console.log(name);
-            //console.log(pwd);
-
-            req.getConnection(function (err, connection) {
-
-                var query = connection.query(
-                    "INSERT INTO user (user_id, name, password) VALUES ('" + user_id + "','" + name + "','" + pwd + "'); INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id) VALUES (" + max + ",'" + title + "','"
-                    + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
-                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + username + "','" + formatted_date + "');", [1,2], function (err, rows) {
                         if (err)
-                            console.log("Error Inserting : %s ", err);
-                        res.redirect('/');
+                            console.log("Error Selecting : %s ", err);
+
+                        max = rows[0][0].id;
+                        res.render('submit', {page_title: "Submit", category:rows[1], isLogged:isLoggedIn, user_name: user_name, errors: errorList});
+
                     });
 
-            });
+                    //console.log(query.sql);
+                });
+            } else {
+                max = max + 1;
 
+                var user_id = username;
+                var pwd = bcrypt.hashSync(password, bcrypt.genSaltSync(10)); //generate encrypted password
+
+                //console.log(user_id);
+                //console.log(name);
+                //console.log(pwd);
+
+                req.getConnection(function (err, connection) {
+
+                    var query = connection.query(
+                        "INSERT INTO user (user_id, name, password) VALUES ('" + user_id + "','" + name + "','" + pwd + "'); INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id) VALUES (" + max + ",'" + title + "','"
+                        + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
+                        + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + username + "','" + formatted_date + "');", [1,2], function (err, rows) {
+                            if (err)
+                                console.log("Error Inserting : %s ", err);
+                            res.redirect('/');
+                        });
+
+                });
+            }
         } else {
 
             var errors = req.validationErrors();
 
-            if (errors)
-                res.render('submit', {
-                    errors: errors
-                });
-            max = max + 1;
+            if (errors){
+                var isLoggedIn = false;
+                if (req.isAuthenticated()){
+                    isLoggedIn = true;
+                    var user_name = req.user[0].user_id;
+                }
+                req.getConnection(function (err, connection) {
 
-            req.getConnection(function (err, connection) {
+                    var query = connection.query("SELECT max(id) as id FROM issue; SELECT name FROM category", [1,2], function (err, rows) {
 
-                var query = connection.query(
-                    "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id, date) VALUES (" + max + ",'" + title + "','"
-                    + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
-                    + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + req.user[0].user_id + "','" + formatted_date + "');", function (err, rows) {
                         if (err)
-                            console.log("Error Inserting : %s ", err);
-                        res.redirect('/');
+                            console.log("Error Selecting : %s ", err);
+
+                        max = rows[0][0].id;
+                        res.render('submit', {page_title: "Submit", category:rows[1], isLogged:isLoggedIn, user_name: user_name, errors: errors});
+
                     });
 
-            });
+                    //console.log(query.sql);
+                });
+            } else {
+                max = max + 1;
+
+                req.getConnection(function (err, connection) {
+
+                    var query = connection.query(
+                        "INSERT INTO issue (id, title, description, zipcode, category, image, thumbnail, latitude, longitude, address, status, user_id, date) VALUES (" + max + ",'" + title + "','"
+                        + desc + "'," + zipcode + ",(SELECT category.id FROM category WHERE category.name = '" + category + "'),'"
+                        + image_url + "','" + thumbnail_url + "','" + latitude + "','" + longitude + "','" + address + "'," + 2 + ",'" + req.user[0].user_id + "','" + formatted_date + "');", function (err, rows) {
+                            if (err)
+                                console.log("Error Inserting : %s ", err);
+                            res.redirect('/');
+                        });
+
+                });
+            }
         }
     });
 });
