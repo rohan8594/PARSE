@@ -93,7 +93,7 @@ router.get('/issue/view/:id', function (req, res, next) {
             if (err)
                 console.log("Error Selecting : %s ", err);
 
-            var formatted_date = moment.tz(rows[0].date, 'America/Los_Angeles').format('MMMM Do YYYY, h:mm a').toString();
+            var formatted_date = moment.tz(rows[0].date, 'America/Los_Angeles').format('MMMM Do YYYY, h:mm a').toString() + " PST";
             console.log(formatted_date);
             res.render('display_issue', {page_title: "View Result", user_name: user_name, data: rows, isLogged:isLoggedIn, date: formatted_date});
 
