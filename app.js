@@ -63,7 +63,7 @@ app.use(expressValidator());
 app.use('/', index);
 app.use('/about', about);
 app.use('/search_results', search_results);
-app.use('/user', user);
+app.use('/user', user);  
 app.use('*/images',express.static('public/images'));
 
 // catch 404 and forward to error handler
